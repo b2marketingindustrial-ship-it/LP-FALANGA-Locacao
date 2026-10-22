@@ -53,7 +53,10 @@ export const header = {
 
 /* -------------------------------------------------------------------- hero */
 
-/** Hero claro: texto à esquerda, compressores Schulz sobre o bloco amarelo à direita. */
+/**
+ * Hero claro do mockup aprovado pelo usuário em 22/10/2026: texto, botão de cotação e selo de
+ * tradição à esquerda; compressores Schulz no chão do estúdio, diante do painel azul.
+ */
 export const hero = {
   eyebrow: 'Sua parceira no Nordeste em soluções de ar comprimido',
   /** H1 completo: é nele que o `check:lp` procura a palavra-chave da campanha. */
@@ -62,15 +65,17 @@ export const hero = {
   highlight: 'Compressores',
   text: [
     'Aluguel de compressores de ar com ',
-    { strong: 'qualidade, flexibilidade e economia' },
-    ': o equipamento certo, quando e onde a sua indústria precisar.',
+    { strong: 'qualidade, flexibilidade e economia:' },
+    ' o equipamento certo, quando e onde a sua indústria precisar.',
   ],
-  callout: [
-    'Com mais de 40 anos de tradição, oferecemos a melhor tecnologia de compressores de ar ',
-    { accent: 'SCHULZ' },
-    '.',
-  ],
-  /** Selo flutuante sobre os compressores. */
+  /** Rótulo do botão do mockup (fora do vocabulário fixo de CTA, a pedido do usuário). */
+  button: 'Solicitar cotação',
+  /** Selo de tradição sob o botão. */
+  trust: {
+    title: 'Mais de 40 anos de tradição',
+    text: ['Tecnologia de compressores de ar ', { accent: 'SCHULZ' }, '.'],
+  },
+  /** Selo flutuante sobre o painel azul. */
   chip: { title: 'Manutenção inclusa', text: 'sem custo além da locação' },
   /** Faixa amarela que fecha o hero. */
   band: ['Temos o ', { strong: 'COMPRESSOR IDEAL' }, ' para a sua aplicação!'],
@@ -83,7 +88,8 @@ export const hero = {
   title: string
   highlight: string
   text: RichText
-  callout: RichText
+  button: string
+  trust: { title: string; text: RichText }
   chip: { title: string; text: string }
   band: RichText
   banner: Photo

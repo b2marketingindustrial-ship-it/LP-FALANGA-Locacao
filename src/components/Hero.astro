@@ -2,12 +2,18 @@
 /**
  * ESTRUTURA FIXA (PROMPT-PADRAO-LP 4.1.2), na versão Falanga.
  *
- * Mesmo desvio do padrão aprovado na LP Spinplus (docs/BRIEFING.md, "Desvios"): hero claro
- * em duas colunas — título, texto e destaque à esquerda, com o espaço vazio do botão de
- * WhatsApp que o plugin preenche (`data-whatsapp-slot`); à direita, os compressores Schulz
- * recortados de pé sobre um palco azul inclinado, que sangra até a borda da tela — fechado
- * pela faixa amarela. Sem coluna de chat. O recorte é o LCP: eager + fetchpriority high,
- * com preload espelhado no Layout.
+ * Layout do mockup aprovado pelo usuário em 22/10/2026 (docs/BRIEFING.md, "Desvios"): estúdio
+ * claro com feixes de luz; à esquerda, título, texto, botão de cotação e selo de tradição; à
+ * direita, os compressores Schulz de pé no chão cinza, diante de um painel azul de borda
+ * inclinada e canto curvo que sangra até a borda da tela — fechado pela faixa amarela.
+ *
+ * O botão fica dentro do espaço do plugin (`data-whatsapp-slot`): onde o plugin troca o
+ * conteúdo do espaço pelo botão dele, o botão daqui sai. Sem coluna de chat. O recorte dos
+ * compressores é o LCP: eager + fetchpriority high, com preload espelhado no Layout.
+ *
+ * Painel e chão se alinham pelo recorte, não pela seção: os dois ficam dentro da coluna da
+ * foto e usam margem/padding em % (que o CSS mede pela largura) para achar a linha do chão,
+ * a uma fração fixa da altura dos compressores.
  */
 import { Picture } from 'astro:assets'
 import Icon from './Icon.astro'
@@ -18,77 +24,95 @@ import { hero } from '../data/content'
 const lead = hero.title.replace(hero.highlight, '').trim()
 ---
 
-<section class="hero-fal relative overflow-hidden" data-hero>
-  <span aria-hidden="true" class="hero-fal__grid pointer-events-none absolute inset-0"></span>
+<section class="hero-fal relative isolate overflow-hidden" data-hero>
+  <span
+    aria-hidden="true"
+    class="hero-fal__rays pointer-events-none absolute inset-0 -z-[5]"
+  ></span>
 
-  <div class="relative mx-auto max-w-page px-6 pt-10 lg:px-10 lg:pt-14">
-    <div class="grid items-end gap-4 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-10">
-      {/* Coluna 1 — texto e espaço do botão */}
-      <div class="max-w-xl self-center lg:max-w-none lg:pb-16">
-        <span class="inline-flex items-center gap-2.5 font-sans text-[12px] font-bold tracking-[0.14em] text-brand uppercase sm:text-[13px]">
-          <span aria-hidden="true" class="h-2 w-5 shrink-0 -skew-x-12 bg-brand-yellow"></span>
+  <div class="hero-fal__inner relative mx-auto max-w-page px-6 pt-10 lg:px-10 lg:pt-14">
+    <div class="grid gap-6 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)] lg:gap-4">
+      {/* Coluna 1 — texto, botão e selo */}
+      <div class="relative z-[1] max-w-xl self-center lg:max-w-none lg:py-4">
+        <span class="inline-flex items-center gap-3 font-sans text-[12px] font-bold tracking-[0.14em] text-brand uppercase sm:text-[13px] lg:whitespace-nowrap">
+          <span aria-hidden="true" class="h-[7px] w-8 shrink-0 bg-brand-yellow"></span>
           {hero.eyebrow}
         </span>
 
-        <h1 class="mt-4 font-display text-[2.7rem] leading-[1.04] text-primary-dark-900 sm:text-[3.5rem] lg:text-[3.4rem] xl:text-[4.1rem]">
-          <span class="block font-medium tracking-[-0.02em]">{lead}</span>
-          <span class="hero-fal__highlight relative isolate inline-block font-extrabold tracking-[-0.02em] text-brand">
+        <h1 class="mt-5 font-display text-[2.9rem] leading-[0.98] font-extrabold tracking-[-0.035em] sm:text-[3.8rem] lg:text-[4rem] xl:text-[4.6rem]">
+          <span class="block text-primary-dark-900">{lead}</span>
+          <span class="hero-fal__highlight relative isolate inline-block text-brand">
             {hero.highlight}
           </span>
         </h1>
 
-        <p class="mt-6 font-sans text-[17px] leading-relaxed text-ink-soft xl:text-lg">
-          <RichText parts={hero.text} />
+        <p class="mt-6 max-w-[34rem] font-sans text-[17px] leading-relaxed text-ink-soft xl:text-[19px]">
+          <RichText parts={hero.text} strongClass="font-bold text-primary-dark-900" />
         </p>
 
-        <p class="mt-6 flex items-start gap-4 rounded-xl border border-neutral-gray-200/40 bg-neutral-light/90 px-5 py-4 font-sans text-[15px] leading-relaxed text-ink shadow-[0_14px_30px_-20px_rgba(0,24,48,0.45)] sm:text-base">
-          <span class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-brand-yellow text-primary-dark-900">
-            <Icon name="trophy" class="size-5" />
-          </span>
-          <span>
-            <RichText parts={hero.callout} />
-          </span>
-        </p>
-
-        {/* Espaço reservado para o botão de WhatsApp do plugin (entra no WordPress) */}
+        {/* Espaço do botão de WhatsApp do plugin, com o botão de cotação dentro */}
         <div
           data-cta="hero-whatsapp"
           data-whatsapp-slot
           class="mt-8 flex min-h-[60px] items-center"
-        ></div>
+        >
+          <button
+            type="button"
+            data-cta="hero-primary"
+            class="btn-slave-whats hero-fal__cta inline-flex items-center gap-3 rounded-xl bg-brand-yellow px-8 py-4 font-sans text-[18px] font-extrabold text-primary-dark-900 shadow-[0_18px_30px_-16px_rgba(160,140,0,0.75)] xl:px-9 xl:text-[20px]"
+          >
+            {hero.button}
+            <Icon name="arrow-right" class="size-6 shrink-0" />
+          </button>
+        </div>
+
+        <p class="mt-8 flex items-center gap-4">
+          <span class="flex size-14 shrink-0 items-center justify-center rounded-full bg-[#e2efff] text-brand">
+            <Icon name="trophy" class="size-7 fill-brand-yellow" />
+          </span>
+          <span class="flex flex-col gap-0.5">
+            <span class="font-display text-[17px] leading-snug font-extrabold text-primary-dark-900 xl:text-lg">
+              {hero.trust.title}
+            </span>
+            <span class="font-sans text-[15px] leading-snug text-ink-soft xl:text-base">
+              <RichText parts={hero.trust.text} />
+            </span>
+          </span>
+        </p>
       </div>
 
-      {/* Coluna 2 — compressores de pé sobre o palco azul */}
-      <div class="relative pt-16 sm:pt-20 lg:pt-28">
-        <div aria-hidden="true" class="hero-fal__stage pointer-events-none absolute">
-          <span class="hero-fal__lines absolute"></span>
-        </div>
-        <span aria-hidden="true" class="hero-fal__floor pointer-events-none absolute"></span>
+      {/* Coluna 2 — compressores no chão, diante do painel azul */}
+      <div class="hero-fal__scene relative -mx-6 flex flex-col justify-end px-6 pt-24 sm:pt-28 lg:mx-0 lg:px-0 lg:pt-36">
+        <div aria-hidden="true" class="hero-fal__panel pointer-events-none absolute -z-10"></div>
+        <span aria-hidden="true" class="hero-fal__floor pointer-events-none absolute -z-10"></span>
+        <span aria-hidden="true" class="hero-fal__shadow pointer-events-none absolute"></span>
 
         <Picture
           src={hero.banner.src}
           alt={hero.banner.alt}
           widths={[640, 960, 1280, 1600]}
-          sizes="(min-width: 1320px) 740px, (min-width: 1024px) 56vw, 100vw"
+          sizes="(min-width: 1320px) 780px, (min-width: 1024px) 58vw, 100vw"
           formats={['avif', 'webp']}
           fallbackFormat="webp"
           loading="eager"
           fetchpriority="high"
           decoding="async"
-          class="relative z-[1] block h-auto w-full drop-shadow-[0_18px_22px_rgba(0,16,40,0.35)] lg:w-[106%] lg:max-w-none"
+          class="hero-fal__machines relative z-[1] block h-auto w-full"
           pictureAttributes={{ class: 'block' }}
         />
 
-        {/* Selo flutuante */}
-        <p class="absolute top-2 right-0 z-[2] flex items-center gap-3 rounded-xl border border-neutral-gray-200/40 bg-neutral-light px-4 py-3 shadow-[0_18px_36px_-18px_rgba(0,24,48,0.55)] sm:top-4 lg:top-8 lg:right-auto lg:left-6">
-          <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-brand text-brand-yellow">
-            <Icon name="wrench" class="size-[18px]" />
+        {/* Selo flutuante sobre o painel */}
+        <p class="absolute top-4 left-6 z-[2] flex items-center gap-3.5 rounded-2xl bg-neutral-light px-4 py-3 shadow-[0_22px_44px_-20px_rgba(0,22,65,0.55)] sm:top-6 lg:top-6 lg:left-[27%] lg:px-5 lg:py-4">
+          <span class="flex size-11 shrink-0 items-center justify-center rounded-full bg-brand text-brand-yellow lg:size-12">
+            <Icon name="wrench" class="size-5 lg:size-[22px]" />
           </span>
           <span class="flex flex-col leading-tight">
-            <span class="font-display text-[15px] font-extrabold text-primary-dark-900">
+            <span class="font-display text-[15px] font-extrabold text-primary-dark-900 lg:text-[17px]">
               {hero.chip.title}
             </span>
-            <span class="font-sans text-[12px] text-ink-soft">{hero.chip.text}</span>
+            <span class="mt-0.5 font-sans text-[12px] text-ink-soft lg:text-[14px]">
+              {hero.chip.text}
+            </span>
           </span>
         </p>
       </div>
@@ -104,20 +128,41 @@ const lead = hero.title.replace(hero.highlight, '').trim()
 </section>
 
 <style>
+  /* Respiro sob os compressores (o chão continua até a faixa) e a linha do chão, medida a
+     partir da base do recorte: 12% da largura da coluna ≈ 32% da altura dos compressores. */
   .hero-fal {
-    background:
-      radial-gradient(900px 520px at 18% 30%, #ffffff 0%, rgb(255 255 255 / 0) 70%),
-      linear-gradient(180deg, #f6f8fb 0%, #eef2f7 100%);
+    --hero-pb: 2.5rem;
+    --hero-horizon: 12%;
+
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f4f8 100%);
   }
 
-  /* Malha de prancheta, mais forte à esquerda, atrás do texto */
-  .hero-fal__grid {
-    background-image:
-      linear-gradient(rgb(0 24 48 / 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(0 24 48 / 0.05) 1px, transparent 1px);
-    background-size: 44px 44px;
-    mask-image: radial-gradient(ellipse 70% 80% at 20% 30%, black 0%, transparent 78%);
-    -webkit-mask-image: radial-gradient(ellipse 70% 80% at 20% 30%, black 0%, transparent 78%);
+  @media (min-width: 1024px) {
+    .hero-fal {
+      --hero-pb: 3.5rem;
+    }
+  }
+
+  .hero-fal__inner {
+    padding-bottom: var(--hero-pb);
+  }
+
+  /* No desktop, os compressores avançam sobre a margem direita do contêiner, mas só até
+     1.5rem da borda da tela: abaixo de ~1400px a margem some e eles ficam dentro dele. */
+  @media (min-width: 1024px) {
+    .hero-fal__scene {
+      margin-right: calc(-1 * clamp(0px, (100vw - 1320px) / 2 + 1rem, 4rem));
+    }
+  }
+
+  /* Feixes de luz entrando pela esquerda, sobre o fundo e o chão */
+  .hero-fal__rays {
+    background:
+      linear-gradient(118deg, transparent 6%, rgb(255 255 255 / 0.95) 13%, transparent 21%),
+      linear-gradient(118deg, transparent 22%, rgb(255 255 255 / 0.75) 29%, transparent 37%),
+      linear-gradient(118deg, transparent 39%, rgb(255 255 255 / 0.55) 45%, transparent 52%);
+    mask-image: linear-gradient(to right, black 0%, black 40%, transparent 68%);
+    -webkit-mask-image: linear-gradient(to right, black 0%, black 40%, transparent 68%);
   }
 
   /* Marca-texto amarelo sob a metade de baixo da palavra em destaque */
@@ -125,63 +170,95 @@ const lead = hero.title.replace(hero.highlight, '').trim()
     content: '';
     position: absolute;
     z-index: -1;
-    right: -0.08em;
-    bottom: 0.08em;
-    left: -0.04em;
-    height: 0.26em;
+    right: -0.02em;
+    bottom: 0.02em;
+    left: -0.02em;
+    height: 0.2em;
     background: var(--color-brand-yellow);
-    transform: skewX(-12deg);
   }
 
-  /* Palco: bloco azul com a borda esquerda inclinada, da metade dos compressores até a
-     faixa, sangrando até a borda direita da tela (o overflow do hero corta o excesso). */
-  .hero-fal__stage {
-    top: 46%;
+  /* Painel azul: retângulo inclinado (borda esquerda a ~25°) com o canto superior curvo,
+     da altura do selo até a linha do chão, sangrando até a borda direita da tela. */
+  .hero-fal__panel {
+    top: 0;
     right: -100vw;
     bottom: 0;
-    left: -1.5rem;
-    clip-path: polygon(48px 0, 100% 0, 100% 100%, 0 100%);
+    left: -2%;
+    margin-bottom: var(--hero-horizon);
+    overflow: hidden;
+    border-top-left-radius: 90px;
+    background: linear-gradient(200deg, #013385 0%, #064cb0 45%, #155ec2 100%);
+    transform: skewX(-25deg);
+    transform-origin: bottom left;
+  }
+
+  /* Malha técnica e dois filetes de brilho, desfeitos da inclinação para ficarem retos */
+  .hero-fal__panel::before,
+  .hero-fal__panel::after {
+    content: '';
+    position: absolute;
+    inset: 0 -60%;
+    transform: skewX(25deg);
+    transform-origin: bottom left;
+  }
+
+  .hero-fal__panel::before {
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .hero-fal__panel::after {
     background:
-      linear-gradient(rgb(255 255 255 / 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(255 255 255 / 0.06) 1px, transparent 1px),
-      linear-gradient(160deg, var(--color-brand) 0%, var(--color-brand-dark) 55%, #102a5a 100%);
-    background-size:
-      36px 36px,
-      36px 36px,
-      auto;
+      linear-gradient(118deg, transparent 58%, rgb(255 255 255 / 0.14) 58.1%, transparent 58.35%),
+      linear-gradient(118deg, transparent 64%, rgb(255 255 255 / 0.1) 64.1%, transparent 64.35%);
   }
 
   @media (min-width: 1024px) {
-    .hero-fal__stage {
-      top: 38%;
-      left: -3rem;
-      clip-path: polygon(90px 0, 100% 0, 100% 100%, 0 100%);
+    .hero-fal__panel {
+      top: -0.5rem;
+      left: -6%;
+      border-top-left-radius: 160px;
     }
   }
 
-  /* Riscos de velocidade da logo, entrando pela borda inclinada */
-  .hero-fal__lines {
-    top: 22px;
-    left: 0;
-    width: 220px;
-    height: 58px;
-    background: repeating-linear-gradient(
-      180deg,
-      var(--color-brand-yellow) 0 4px,
-      transparent 4px 13px
-    );
-    mask-image: linear-gradient(to right, black 30%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, black 30%, transparent 100%);
+  /* Chão do estúdio: da linha do horizonte até a faixa, de ponta a ponta da tela */
+  .hero-fal__floor {
+    right: -100vw;
+    bottom: calc(-1 * var(--hero-pb));
+    left: -100vw;
+    height: 0;
+    padding-top: calc(var(--hero-horizon) + var(--hero-pb));
+    background:
+      linear-gradient(180deg, rgb(120 130 150 / 0.35) 0, transparent 3px),
+      radial-gradient(40% 70% at 62% 20%, rgb(160 170 188 / 0.35) 0%, transparent 70%),
+      linear-gradient(180deg, #dadee5 0%, #e5e8ed 22%, #edf0f4 60%, #f3f5f8 100%);
   }
 
-  /* Sombra no chão, sob os compressores */
-  .hero-fal__floor {
+  /* Sombra de contato sob os compressores */
+  .hero-fal__shadow {
     right: 4%;
-    bottom: -6px;
+    bottom: -8px;
     left: 2%;
-    z-index: 1;
-    height: 26px;
-    background: radial-gradient(ellipse at center, rgb(0 10 30 / 0.45) 0%, transparent 70%);
+    height: 30px;
+    background: radial-gradient(ellipse at center, rgb(0 16 40 / 0.4) 0%, transparent 70%);
+  }
+
+  /* Reflexo no chão encerado (só Chromium e Safari; nos outros o chão fica liso) */
+  .hero-fal__machines {
+    -webkit-box-reflect: below 0 linear-gradient(transparent 78%, rgb(255 255 255 / 0.22));
+  }
+
+  .hero-fal__cta {
+    transition:
+      transform 200ms ease-out,
+      filter 200ms ease-out;
+  }
+
+  .hero-fal__cta:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.04);
   }
 
   /* Faixa amarela com cortes diagonais nas pontas */
@@ -197,5 +274,15 @@ const lead = hero.title.replace(hero.highlight, '').trim()
       ),
       linear-gradient(180deg, var(--color-brand-yellow) 0%, var(--color-brand-yellow-dark) 100%);
     box-shadow: inset 0 3px 0 rgb(0 0 0 / 0.06);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-fal__cta {
+      transition: none;
+    }
+
+    .hero-fal__cta:hover {
+      transform: none;
+    }
   }
 </style>
