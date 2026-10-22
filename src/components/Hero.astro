@@ -1,0 +1,201 @@
+---
+/**
+ * ESTRUTURA FIXA (PROMPT-PADRAO-LP 4.1.2), na versão Falanga.
+ *
+ * Mesmo desvio do padrão aprovado na LP Spinplus (docs/BRIEFING.md, "Desvios"): hero claro
+ * em duas colunas — título, texto e destaque à esquerda, com o espaço vazio do botão de
+ * WhatsApp que o plugin preenche (`data-whatsapp-slot`); à direita, os compressores Schulz
+ * recortados de pé sobre um palco azul inclinado, que sangra até a borda da tela — fechado
+ * pela faixa amarela. Sem coluna de chat. O recorte é o LCP: eager + fetchpriority high,
+ * com preload espelhado no Layout.
+ */
+import { Picture } from 'astro:assets'
+import Icon from './Icon.astro'
+import RichText from './RichText.astro'
+import { hero } from '../data/content'
+
+/** Primeira linha do H1: o título sem o trecho em destaque. */
+const lead = hero.title.replace(hero.highlight, '').trim()
+---
+
+<section class="hero-fal relative overflow-hidden" data-hero>
+  <span aria-hidden="true" class="hero-fal__grid pointer-events-none absolute inset-0"></span>
+
+  <div class="relative mx-auto max-w-page px-6 pt-10 lg:px-10 lg:pt-14">
+    <div class="grid items-end gap-4 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-10">
+      {/* Coluna 1 — texto e espaço do botão */}
+      <div class="max-w-xl self-center lg:max-w-none lg:pb-16">
+        <span class="inline-flex items-center gap-2.5 font-sans text-[12px] font-bold tracking-[0.14em] text-brand uppercase sm:text-[13px]">
+          <span aria-hidden="true" class="h-2 w-5 shrink-0 -skew-x-12 bg-brand-yellow"></span>
+          {hero.eyebrow}
+        </span>
+
+        <h1 class="mt-4 font-display text-[2.7rem] leading-[1.04] text-primary-dark-900 sm:text-[3.5rem] lg:text-[3.4rem] xl:text-[4.1rem]">
+          <span class="block font-medium tracking-[-0.02em]">{lead}</span>
+          <span class="hero-fal__highlight relative isolate inline-block font-extrabold tracking-[-0.02em] text-brand">
+            {hero.highlight}
+          </span>
+        </h1>
+
+        <p class="mt-6 font-sans text-[17px] leading-relaxed text-ink-soft xl:text-lg">
+          <RichText parts={hero.text} />
+        </p>
+
+        <p class="mt-6 flex items-start gap-4 rounded-xl border border-neutral-gray-200/40 bg-neutral-light/90 px-5 py-4 font-sans text-[15px] leading-relaxed text-ink shadow-[0_14px_30px_-20px_rgba(0,24,48,0.45)] sm:text-base">
+          <span class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-brand-yellow text-primary-dark-900">
+            <Icon name="trophy" class="size-5" />
+          </span>
+          <span>
+            <RichText parts={hero.callout} />
+          </span>
+        </p>
+
+        {/* Espaço reservado para o botão de WhatsApp do plugin (entra no WordPress) */}
+        <div
+          data-cta="hero-whatsapp"
+          data-whatsapp-slot
+          class="mt-8 flex min-h-[60px] items-center"
+        ></div>
+      </div>
+
+      {/* Coluna 2 — compressores de pé sobre o palco azul */}
+      <div class="relative pt-16 sm:pt-20 lg:pt-28">
+        <div aria-hidden="true" class="hero-fal__stage pointer-events-none absolute">
+          <span class="hero-fal__lines absolute"></span>
+        </div>
+        <span aria-hidden="true" class="hero-fal__floor pointer-events-none absolute"></span>
+
+        <Picture
+          src={hero.banner.src}
+          alt={hero.banner.alt}
+          widths={[640, 960, 1280, 1600]}
+          sizes="(min-width: 1320px) 740px, (min-width: 1024px) 56vw, 100vw"
+          formats={['avif', 'webp']}
+          fallbackFormat="webp"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          class="relative z-[1] block h-auto w-full drop-shadow-[0_18px_22px_rgba(0,16,40,0.35)] lg:w-[106%] lg:max-w-none"
+          pictureAttributes={{ class: 'block' }}
+        />
+
+        {/* Selo flutuante */}
+        <p class="absolute top-2 right-0 z-[2] flex items-center gap-3 rounded-xl border border-neutral-gray-200/40 bg-neutral-light px-4 py-3 shadow-[0_18px_36px_-18px_rgba(0,24,48,0.55)] sm:top-4 lg:top-8 lg:right-auto lg:left-6">
+          <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-brand text-brand-yellow">
+            <Icon name="wrench" class="size-[18px]" />
+          </span>
+          <span class="flex flex-col leading-tight">
+            <span class="font-display text-[15px] font-extrabold text-primary-dark-900">
+              {hero.chip.title}
+            </span>
+            <span class="font-sans text-[12px] text-ink-soft">{hero.chip.text}</span>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {/* Faixa amarela que fecha o hero */}
+  <div class="hero-band relative z-[2] bg-brand-yellow">
+    <p class="relative mx-auto max-w-page px-6 py-5 text-center font-sans text-xl leading-snug font-semibold text-primary-dark-900 sm:text-2xl lg:px-10 lg:py-6 lg:text-[28px]">
+      <RichText parts={hero.band} strongClass="font-extrabold" />
+    </p>
+  </div>
+</section>
+
+<style>
+  .hero-fal {
+    background:
+      radial-gradient(900px 520px at 18% 30%, #ffffff 0%, rgb(255 255 255 / 0) 70%),
+      linear-gradient(180deg, #f6f8fb 0%, #eef2f7 100%);
+  }
+
+  /* Malha de prancheta, mais forte à esquerda, atrás do texto */
+  .hero-fal__grid {
+    background-image:
+      linear-gradient(rgb(0 24 48 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(0 24 48 / 0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 70% 80% at 20% 30%, black 0%, transparent 78%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 80% at 20% 30%, black 0%, transparent 78%);
+  }
+
+  /* Marca-texto amarelo sob a metade de baixo da palavra em destaque */
+  .hero-fal__highlight::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    right: -0.08em;
+    bottom: 0.08em;
+    left: -0.04em;
+    height: 0.26em;
+    background: var(--color-brand-yellow);
+    transform: skewX(-12deg);
+  }
+
+  /* Palco: bloco azul com a borda esquerda inclinada, da metade dos compressores até a
+     faixa, sangrando até a borda direita da tela (o overflow do hero corta o excesso). */
+  .hero-fal__stage {
+    top: 46%;
+    right: -100vw;
+    bottom: 0;
+    left: -1.5rem;
+    clip-path: polygon(48px 0, 100% 0, 100% 100%, 0 100%);
+    background:
+      linear-gradient(rgb(255 255 255 / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.06) 1px, transparent 1px),
+      linear-gradient(160deg, var(--color-brand) 0%, var(--color-brand-dark) 55%, #102a5a 100%);
+    background-size:
+      36px 36px,
+      36px 36px,
+      auto;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-fal__stage {
+      top: 38%;
+      left: -3rem;
+      clip-path: polygon(90px 0, 100% 0, 100% 100%, 0 100%);
+    }
+  }
+
+  /* Riscos de velocidade da logo, entrando pela borda inclinada */
+  .hero-fal__lines {
+    top: 22px;
+    left: 0;
+    width: 220px;
+    height: 58px;
+    background: repeating-linear-gradient(
+      180deg,
+      var(--color-brand-yellow) 0 4px,
+      transparent 4px 13px
+    );
+    mask-image: linear-gradient(to right, black 30%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 30%, transparent 100%);
+  }
+
+  /* Sombra no chão, sob os compressores */
+  .hero-fal__floor {
+    right: 4%;
+    bottom: -6px;
+    left: 2%;
+    z-index: 1;
+    height: 26px;
+    background: radial-gradient(ellipse at center, rgb(0 10 30 / 0.45) 0%, transparent 70%);
+  }
+
+  /* Faixa amarela com cortes diagonais nas pontas */
+  .hero-band {
+    background-image:
+      linear-gradient(
+        115deg,
+        transparent 0 6%,
+        rgb(255 255 255 / 0.22) 6% 14%,
+        transparent 14% 86%,
+        rgb(0 0 0 / 0.05) 86% 94%,
+        transparent 94%
+      ),
+      linear-gradient(180deg, var(--color-brand-yellow) 0%, var(--color-brand-yellow-dark) 100%);
+    box-shadow: inset 0 3px 0 rgb(0 0 0 / 0.06);
+  }
+</style>

@@ -1,0 +1,142 @@
+---
+/**
+ * ESTRUTURA FIXA (PROMPT-PADRAO-LP 4.1.4), na versão Falanga.
+ *
+ * Mesmo desvio do padrão aprovado na LP Spinplus (docs/BRIEFING.md, "Desvios"): faixa
+ * escura; título, texto e os três pontos do fechamento da LP antiga à esquerda; à direita,
+ * o espaço do formulário. Fundo navy com malha técnica e brilho amarelo, sem foto.
+ * Mobile: texto antes do formulário.
+ *
+ * Os dois espaços ficam vazios para o plugin de atendimento do WordPress preencher:
+ * o botão de WhatsApp entra em `data-whatsapp-slot` e o formulário é o shortcode, nunca
+ * um <form> próprio. Onde o plugin não roda (Vercel), o shortcode cru fica escondido.
+ */
+import Icon from './Icon.astro'
+import RichText from './RichText.astro'
+import { quote } from '../data/content'
+import { site } from '../data/site'
+---
+
+<section
+  id="cotacao"
+  class="quote-fal relative isolate overflow-hidden bg-primary-dark-900 py-16 lg:py-24"
+  data-quote="falanga"
+>
+  {/* Fundo: navy com malha técnica e brilho amarelo atrás do formulário */}
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+    <span class="blueprint-grid absolute inset-0"></span>
+    <span class="quote-fal__glow absolute"></span>
+    <span class="quote-fal__lines absolute hidden lg:block"></span>
+  </div>
+
+  <div class="mx-auto max-w-page px-6 lg:px-10">
+    <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.85fr)] lg:gap-14">
+      {/* Coluna de texto */}
+      <div>
+        <h2 class="font-display text-[2rem] leading-[1.12] font-normal tracking-[-0.01em] text-neutral-light sm:text-[2.5rem] lg:text-[2.35rem] xl:text-[2.6rem]">
+          <RichText parts={quote.title} strongClass="font-extrabold text-brand-yellow" />
+        </h2>
+
+        <p class="mt-5 max-w-2xl font-sans text-[17px] leading-relaxed text-neutral-light/80 xl:text-lg">
+          <RichText parts={quote.text} strongClass="font-bold text-neutral-light" />
+        </p>
+
+        <ul class="mt-7 flex flex-col gap-3">
+          {quote.points.map((point) => (
+            <li class="flex items-center gap-3 font-sans text-[15px] leading-snug text-neutral-light/90 sm:text-base">
+              <span class="flex size-7 shrink-0 items-center justify-center rounded-full bg-brand-yellow text-primary-dark-900">
+                <Icon name="check" class="size-4" />
+              </span>
+              {point}
+            </li>
+          ))}
+        </ul>
+
+        {/* Espaço reservado para o botão de WhatsApp do plugin (entra no WordPress) */}
+        <div
+          data-cta="cotacao-whatsapp"
+          data-whatsapp-slot
+          class="mt-8 flex min-h-[60px] items-center"
+        ></div>
+      </div>
+
+      {/* Espaço do formulário: o plugin renderiza o shortcode aqui (entra no WordPress) */}
+      <div>
+        <div class="min-h-[420px] lg:min-h-[520px]" data-quote-slot>
+          <slot name="shortcode" />
+        </div>
+
+        {/* Nota de LGPD */}
+        <p class="mt-4 font-sans text-[11px] leading-relaxed text-neutral-light/65">
+          {quote.lgpd}
+          {site.privacyUrl && (
+            <>
+              {' '}
+              <a
+                href={site.privacyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-semibold text-neutral-light/90 underline-offset-2 hover:underline"
+              >
+                Política de privacidade
+              </a>
+              .
+            </>
+          )}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .quote-fal {
+    background:
+      radial-gradient(1000px 520px at 0% 0%, rgb(40 88 168 / 0.45) 0%, transparent 60%),
+      linear-gradient(165deg, #0d2a5c 0%, #071a3a 55%, #04122a 100%);
+  }
+
+  .quote-fal__glow {
+    top: 50%;
+    right: -10%;
+    width: 760px;
+    height: 760px;
+    transform: translateY(-50%);
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgb(248 232 24 / 0.12) 0%, transparent 65%);
+  }
+
+  /* Riscos de velocidade da logo no canto superior direito */
+  .quote-fal__lines {
+    top: 56px;
+    right: 0;
+    width: 280px;
+    height: 70px;
+    background: repeating-linear-gradient(
+      180deg,
+      rgb(248 232 24 / 0.55) 0 4px,
+      transparent 4px 14px
+    );
+    mask-image: linear-gradient(to left, black 20%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to left, black 20%, transparent 100%);
+  }
+</style>
+
+<script>
+  // O plugin do WordPress troca o shortcode pelo formulário. Onde ele não roda (Vercel),
+  // sobra o texto cru do shortcode: ele fica invisível e o espaço segue vazio. O observer
+  // cobre o plugin que renderiza depois do carregamento.
+  document.querySelectorAll<HTMLElement>('[data-quote-slot]').forEach((slot) => {
+    const sync = () => {
+      const raw = !slot.querySelector('*') && (slot.textContent ?? '').trim().startsWith('[')
+      slot.style.visibility = raw ? 'hidden' : ''
+    }
+
+    sync()
+    new MutationObserver(sync).observe(slot, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+    })
+  })
+</script>

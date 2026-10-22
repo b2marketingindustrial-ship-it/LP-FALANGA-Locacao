@@ -1,0 +1,152 @@
+---
+/**
+ * Diferenciais — fase "autoridade" da biblioteca B2.
+ *
+ * Falanga: seção clara em duas colunas — título, texto e a placa com as marcas Falanga e
+ * Schulz à esquerda; à direita, os 5 diferenciais da LP antiga num bento de 2 colunas,
+ * com o último ("Seu parceiro no Nordeste") largo e em azul. Sem CTA próprio: a Cotação
+ * vem logo em seguida. `npm run compose` sobrescreve este arquivo com o da biblioteca:
+ * restaure esta versão depois de recompor.
+ */
+import { Image } from 'astro:assets'
+import Section from '@components/Section.astro'
+import Icon from '@components/Icon.astro'
+import type { SectionProps } from '@lib/layout'
+import { header } from '@data/content'
+import { site } from '@data/site'
+import { why } from '@data/sections/diferenciais'
+import logo from '@assets/LOGO.png'
+
+type Props = SectionProps
+
+const { tone, rhythm } = Astro.props
+
+const lastIndex = why.reasons.length - 1
+---
+
+<Section
+  id="diferenciais"
+  tone={tone}
+  rhythm={rhythm}
+  container={false}
+  class="relative overflow-hidden"
+>
+  <div class="mx-auto max-w-page px-6 pt-14 pb-12 lg:px-10 lg:pt-16 lg:pb-16">
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-center lg:gap-14 xl:gap-20">
+      {/* Título, texto e as duas marcas */}
+      <div class="min-w-0">
+        <span class="inline-flex items-center gap-2.5 font-sans text-[12px] font-bold tracking-[0.16em] text-brand uppercase sm:text-[13px]">
+          <span aria-hidden="true" class="h-2 w-5 shrink-0 -skew-x-12 bg-brand-yellow"></span>
+          {why.eyebrow}
+        </span>
+
+        <h2 class="mt-3 font-display text-3xl leading-[1.08] font-extrabold tracking-[-0.015em] text-primary-dark-900 sm:text-4xl lg:text-[2.6rem] xl:text-[3rem]">
+          {why.titleLines.map((line, i) => (
+            <>
+              {i > 0 && <br class="hidden sm:block" />}
+              {i > 0 && <span class="sm:hidden"> </span>}
+              {line}
+            </>
+          ))}
+        </h2>
+
+        <span aria-hidden="true" class="mt-6 block h-[3px] w-16 bg-brand"></span>
+        <p class="mt-5 font-sans text-base leading-relaxed text-ink-soft sm:text-lg">{why.text}</p>
+
+        <div class="mt-8 inline-flex items-center gap-5 rounded-2xl border border-neutral-gray-200/40 bg-neutral-light px-5 py-4 shadow-[0_14px_30px_-22px_rgba(0,24,48,0.45)] sm:gap-7 sm:px-6">
+          <Image
+            src={logo}
+            alt={site.brand}
+            width={341}
+            height={82}
+            format="webp"
+            loading="lazy"
+            decoding="async"
+            class="h-10 w-auto sm:h-12"
+          />
+          <span aria-hidden="true" class="h-10 w-px bg-neutral-gray-200/60"></span>
+          <Image
+            src={header.partner.src}
+            alt={header.partner.alt}
+            width={317}
+            height={80}
+            format="webp"
+            loading="lazy"
+            decoding="async"
+            class="h-7 w-auto sm:h-8"
+          />
+        </div>
+      </div>
+
+      {/* Os 5 diferenciais */}
+      <ul
+        class="grid gap-4 sm:grid-cols-2 lg:gap-5"
+        aria-label={`Diferenciais da ${site.brandShort}`}
+      >
+        {why.reasons.map((reason, i) =>
+          i === lastIndex ? (
+            <li class="why-wide relative isolate flex flex-col gap-5 overflow-hidden rounded-2xl bg-brand p-6 text-neutral-light shadow-[0_24px_44px_-26px_rgba(20,56,122,0.8)] sm:col-span-2 sm:flex-row sm:items-center sm:p-7">
+              <span
+                aria-hidden="true"
+                class="why-wide__lines absolute -z-10 hidden sm:block"
+              ></span>
+              <span class="flex size-14 shrink-0 items-center justify-center rounded-xl bg-brand-yellow text-primary-dark-900">
+                <Icon name={reason.icon} class="size-7" />
+              </span>
+              <span class="flex min-w-0 flex-col">
+                <span class="font-display text-xl leading-snug font-extrabold">{reason.title}</span>
+                <span class="mt-1.5 font-sans text-[15px] leading-relaxed text-neutral-light/80 sm:max-w-sm">
+                  {reason.description}
+                </span>
+              </span>
+              <span
+                aria-hidden="true"
+                class="font-display text-[13px] font-extrabold tracking-[0.12em] text-brand-yellow sm:ml-auto sm:self-start"
+              >
+                {String(i + 1).padStart(2, '0')}
+              </span>
+            </li>
+          ) : (
+            <li class="relative flex flex-col rounded-2xl border border-neutral-gray-200/40 bg-neutral-light p-6 shadow-[0_10px_28px_-22px_rgba(0,24,48,0.4)]">
+              <span class="flex items-start justify-between gap-4">
+                <span class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-brand-yellow text-primary-dark-900">
+                  <Icon name={reason.icon} class="size-6" />
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="font-display text-[13px] font-extrabold tracking-[0.12em] text-neutral-gray-200"
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+              </span>
+              <span class="mt-5 font-display text-[17px] leading-snug font-extrabold text-primary-dark-900">
+                {reason.title}
+              </span>
+              <span aria-hidden="true" class="mt-2.5 block h-[3px] w-8 bg-brand"></span>
+              <span class="mt-2.5 font-sans text-[14px] leading-relaxed text-ink-soft">
+                {reason.description}
+              </span>
+            </li>
+          ),
+        )}
+      </ul>
+    </div>
+  </div>
+</Section>
+
+<style>
+  /* Riscos de velocidade da logo no card largo */
+  .why-wide__lines {
+    right: 0;
+    bottom: 16px;
+    width: 170px;
+    height: 58px;
+    background: repeating-linear-gradient(
+      180deg,
+      rgb(248 232 24 / 0.35) 0 4px,
+      transparent 4px 13px
+    );
+    mask-image: linear-gradient(to left, black 10%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to left, black 10%, transparent 100%);
+  }
+</style>

@@ -1,0 +1,164 @@
+---
+/**
+ * Painel de apoio à identificação — fase "apoio" da biblioteca B2.
+ *
+ * Falanga: volta a ser o bloco navy da fase de apoio (na LP Spinplus era seção clara).
+ * Painel arredondado com malha técnica e riscos amarelos da logo: título e texto à
+ * esquerda, botão amarelo à direita e, na base, a faixa com os 6 dados do orçamento.
+ * `npm run compose` sobrescreve este arquivo com o da biblioteca: restaure esta versão
+ * depois de recompor.
+ */
+import Section from '@components/Section.astro'
+import Icon from '@components/Icon.astro'
+import type { SectionProps } from '@lib/layout'
+import { cta } from '@data/content'
+import { supportPanel } from '@data/sections/identificar'
+
+type Props = SectionProps
+
+const { tone, rhythm } = Astro.props
+---
+
+<Section id="identificar" tone={tone} rhythm={rhythm} class="relative overflow-hidden">
+  <div class="navy-premium relative isolate overflow-hidden rounded-3xl px-6 py-9 sm:px-10 lg:px-14 lg:py-12">
+    <span
+      aria-hidden="true"
+      class="blueprint-grid pointer-events-none absolute inset-0 -z-10"
+    ></span>
+    <span
+      aria-hidden="true"
+      class="support-lines pointer-events-none absolute -z-10 hidden lg:block"
+    ></span>
+
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+      <div class="min-w-0 max-w-2xl">
+        <span class="inline-flex items-center gap-2.5 font-sans text-[12px] font-bold tracking-[0.16em] text-brand-yellow uppercase sm:text-[13px]">
+          <span aria-hidden="true" class="h-2 w-5 shrink-0 -skew-x-12 bg-brand-yellow"></span>
+          {supportPanel.eyebrow}
+        </span>
+
+        <h2 class="mt-3 font-display text-3xl leading-[1.1] font-extrabold tracking-[-0.01em] text-neutral-light sm:text-4xl lg:text-[2.25rem] xl:text-[2.55rem]">
+          {supportPanel.title}
+        </h2>
+
+        <p class="mt-4 font-sans text-base leading-relaxed text-neutral-light/75 sm:text-[17px]">
+          {supportPanel.text}
+        </p>
+      </div>
+
+      <div class="flex flex-col items-stretch gap-3 lg:shrink-0 lg:items-end">
+        <button
+          type="button"
+          data-cta="identificar-cta"
+          class="btn-slave-whats support-cta inline-flex items-center justify-center gap-3 rounded-md bg-brand-yellow px-8 py-4 font-sans text-[16px] font-extrabold text-primary-dark-900 shadow-[0_16px_30px_-14px_rgba(248,232,24,0.45)] sm:text-[17px]"
+        >
+          {cta.primary}
+          <Icon name="arrow-right" class="size-5 shrink-0" />
+        </button>
+        <span class="flex items-center justify-center gap-2 font-sans text-[14px] text-neutral-light/75 lg:justify-end">
+          <Icon name="shield" class="size-5 shrink-0 text-brand-yellow" />
+          {supportPanel.microcopy}
+        </span>
+      </div>
+    </div>
+
+    <p class="mt-10 font-sans text-[12px] font-semibold tracking-[0.18em] text-neutral-light/55 uppercase lg:mt-12">
+      {supportPanel.itemsTitle}
+    </p>
+    <ul class="support-strip mt-4 grid grid-cols-2 rounded-xl border border-white/10 bg-white/[0.05] backdrop-blur-sm sm:grid-cols-3 xl:flex">
+      {supportPanel.items.map((item) => (
+        <li class="support-item flex flex-col items-start gap-2.5 px-4 py-4 sm:flex-row sm:items-center sm:gap-3.5 sm:px-5 sm:py-5 lg:gap-2.5 lg:px-3 lg:py-6 xl:flex-1 xl:justify-center xl:gap-3 xl:px-4">
+          <Icon
+            name={item.icon}
+            class="size-7 shrink-0 text-brand-yellow sm:size-9 lg:size-8 xl:size-9"
+          />
+          <span class="flex min-w-0 flex-col gap-1">
+            <span class="font-display text-[15px] leading-tight font-bold text-neutral-light sm:text-base xl:text-[17px] xl:whitespace-nowrap">
+              {item.label}
+            </span>
+            <span class="font-sans text-[12px] leading-snug text-neutral-light/60 sm:text-[13px] xl:whitespace-nowrap">
+              {item.hint}
+            </span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>
+
+<style>
+  /* Riscos de velocidade da logo no canto superior direito do painel */
+  .support-lines {
+    top: 28px;
+    right: 0;
+    width: 240px;
+    height: 58px;
+    background: repeating-linear-gradient(
+      180deg,
+      rgb(248 232 24 / 0.5) 0 4px,
+      transparent 4px 13px
+    );
+    mask-image: linear-gradient(to left, black 15%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to left, black 15%, transparent 100%);
+  }
+
+  /* Divisórias internas, que não encostam no topo nem na base da faixa */
+  .support-item {
+    position: relative;
+  }
+
+  .support-item::after {
+    content: '';
+    position: absolute;
+    top: 18%;
+    right: 0;
+    bottom: 18%;
+    width: 1px;
+    background: rgb(255 255 255 / 0.12);
+  }
+
+  .support-item:nth-child(2n)::after {
+    display: none;
+  }
+
+  @media (width >= 40rem) {
+    .support-item:nth-child(2n)::after {
+      display: block;
+    }
+
+    .support-item:nth-child(3n)::after {
+      display: none;
+    }
+  }
+
+  @media (width >= 80rem) {
+    .support-item:nth-child(3n)::after {
+      display: block;
+    }
+
+    .support-item:last-child::after {
+      display: none;
+    }
+  }
+
+  .support-cta {
+    transition:
+      transform 200ms ease-out,
+      filter 200ms ease-out;
+  }
+
+  .support-cta:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .support-cta {
+      transition: none;
+    }
+
+    .support-cta:hover {
+      transform: none;
+    }
+  }
+</style>

@@ -1,0 +1,29 @@
+---
+/**
+ * Texto corrido com destaques, a partir de um `RichText` de `src/data/content.ts`:
+ * string = texto normal, `{ strong }` = negrito, `{ accent }` = negrito azul.
+ */
+import type { RichText } from '../data/content'
+
+interface Props {
+  parts: RichText
+  strongClass?: string
+  accentClass?: string
+}
+
+const {
+  parts,
+  strongClass = 'font-bold text-ink',
+  accentClass = 'font-bold text-brand',
+} = Astro.props
+---
+
+{parts.map((part) =>
+  typeof part === 'string' ? (
+    part
+  ) : 'strong' in part ? (
+    <strong class={strongClass}>{part.strong}</strong>
+  ) : (
+    <strong class={accentClass}>{part.accent}</strong>
+  ),
+)}

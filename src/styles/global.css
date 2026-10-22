@@ -1,0 +1,217 @@
+@import 'tailwindcss';
+
+/* Manrope servida pela própria página (variável, 400–800, subconjunto latin) e pré-carregada
+   no Layout: chega antes da primeira pintura e não troca a fonte com a página já desenhada,
+   o que deslocava o texto do hero e estourava o CLS do Lighthouse. */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('./fonts/manrope-latin.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ---------------------------------------------------------------------------
+   Tokens do padrão B2 (PROMPT-PADRAO-LP, item 2).
+   Só altere os valores se a entrevista (entrada 21) trouxer cores/fonte do cliente.
+   --------------------------------------------------------------------------- */
+@theme {
+  /* Falanga: navy puxado para o azul da logo. */
+  --color-primary-dark: #0b2453;
+  --color-primary-dark-800: #14387a;
+  --color-primary-dark-900: #071a3d;
+  --color-accent-orange: #ff6b00;
+  --color-accent-orange-dark: #e55f00;
+  --color-neutral-light: #ffffff;
+  --color-neutral-gray-100: #f5f7fa;
+  --color-neutral-gray-200: #a0a0a0;
+  --color-ink: #1b2733;
+  --color-ink-soft: #44546a;
+
+  /* Falanga: azul e amarelo da logo. O azul é texto e detalhe sobre fundo claro; o amarelo
+     é superfície de destaque (faixa do hero, botões, ícones) e marcador sobre o navy. */
+  --color-brand: #2858a8;
+  --color-brand-dark: #1c4387;
+  --color-brand-yellow: #f8e818;
+  --color-brand-yellow-dark: #e6d40c;
+
+  --container-page: 1320px;
+
+  /* Uma única família para títulos e corpo; o peso e o tracking fazem a hierarquia. */
+  --font-display: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-neutral-light font-sans text-ink antialiased;
+  }
+
+  .font-display {
+    letter-spacing: -0.015em;
+  }
+
+  ::selection {
+    @apply bg-brand text-neutral-light;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+}
+
+/* Fundo navy com brilho radial: hero, painéis, bloco de diferenciais e footer. */
+@utility navy-premium {
+  background-color: var(--color-primary-dark);
+  background-image:
+    radial-gradient(1200px 520px at 16% -10%, rgb(255 255 255 / 0.08) 0%, transparent 55%),
+    linear-gradient(
+      165deg,
+      var(--color-primary-dark-800) 0%,
+      var(--color-primary-dark) 50%,
+      var(--color-primary-dark-900) 100%
+    );
+}
+
+/* Malha de blueprint esmaecida nas bordas, usada sobre navy. */
+@utility blueprint-grid {
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(ellipse at 20% 0%, black 0%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse at 20% 0%, black 0%, transparent 78%);
+}
+
+/* Cantos técnicos laranja (18px) em painéis navy. */
+@utility tech-corners {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-color: var(--color-accent-orange);
+    border-style: solid;
+    border-width: 0;
+    opacity: 0.9;
+    pointer-events: none;
+  }
+
+  &::before {
+    top: 14px;
+    left: 14px;
+    border-top-width: 2px;
+    border-left-width: 2px;
+  }
+
+  &::after {
+    right: 14px;
+    bottom: 14px;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+  }
+}
+
+/* Badge de vidro com brilho interno laranja. */
+@utility glass-badge {
+  background-image: linear-gradient(
+    160deg,
+    rgb(255 255 255 / 0.16) 0%,
+    rgb(255 255 255 / 0.04) 100%
+  );
+  border: 1px solid rgb(255 255 255 / 0.16);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.22),
+    inset 0 -10px 14px -10px rgb(255 107 0 / 0.45),
+    0 12px 22px -14px rgb(0 0 0 / 0.85);
+}
+
+/* Trilho horizontal sem barra de rolagem aparente (listas no mobile). */
+@utility scroll-track {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Divisões entre as seções com cantos arredondados (herdadas da LP Spinplus, 15/10/2026,
+   mantidas na Falanga). Cada seção termina com os cantos de baixo curvos e a seguinte sobe por
+   baixo dela: a margem negativa a esconde sob a curva e a borda transparente do mesmo
+   tamanho devolve o espaço, então conteúdo e decorações não mudam de lugar. `:not(:first-of-type)`
+   e não `section + section`: o Astro renderiza o <script> de uma seção entre ela e a seguinte.
+   Fora de @layer de propósito: precisa vencer as utilities de fundo e de borda.
+   --------------------------------------------------------------------------- */
+:root {
+  --lp-round: 2rem;
+}
+
+@media (width >= 64rem) {
+  :root {
+    --lp-round: 3rem;
+  }
+}
+
+#main > section {
+  position: relative;
+  border-bottom-left-radius: var(--lp-round);
+  border-bottom-right-radius: var(--lp-round);
+}
+
+#main > section:not(:first-of-type),
+#main + footer {
+  position: relative;
+  margin-top: calc(-1 * var(--lp-round));
+  border-top: var(--lp-round) solid transparent;
+}
+
+/* Cada seção por cima da seguinte, para a curva aparecer sobre ela */
+#main > section:nth-of-type(1) {
+  z-index: 5;
+}
+
+#main > section:nth-of-type(2) {
+  z-index: 4;
+}
+
+#main > section:nth-of-type(3) {
+  z-index: 3;
+}
+
+#main > section:nth-of-type(4) {
+  z-index: 2;
+}
+
+#main > section:nth-of-type(5) {
+  z-index: 1;
+}
+
+#main + footer {
+  z-index: 0;
+}
+
+/* Fundos que dão contraste às curvas: locação branca → orçamento cinza-claro (com o painel
+   navy) → diferenciais do branco ao azul-claro → cotação escura → rodapé navy */
+#identificar {
+  background-color: #f4f6f9;
+}
+
+#diferenciais {
+  background:
+    radial-gradient(1000px 380px at 85% 50%, #ffffff 0%, rgb(255 255 255 / 0) 62%),
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 25%, #f1f5f9 70%, #eef2f7 100%);
+}
