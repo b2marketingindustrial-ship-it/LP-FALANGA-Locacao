@@ -22,12 +22,12 @@ export interface RentalUse {
 export const rental = {
   eyebrow: 'Aluguel de compressores',
   title: 'Eficiência, confiabilidade e economia para a sua indústria',
-  text: 'A disponibilidade e a eficiência do seu sistema de ar comprimido são cruciais para a produtividade do seu negócio. Com a locação da Falanga, você tem ar comprimido de qualidade sem imobilizar capital em equipamento.',
+  text: 'Locação da Falanga: ar comprimido de qualidade para a produtividade da sua indústria, sem imobilizar capital em equipamento.',
   photo: {
     src: frota,
     alt: 'Compressores de parafuso Schulz SRP 4030 da frota de locação da Falanga Pneumática instalados em sala de compressores',
   },
-  stat: { value: '40+', label: 'anos de tradição em ar comprimido' },
+  stat: { value: '1981', label: 'atuando em ar comprimido' },
   items: [
     {
       icon: 'alert',

@@ -94,9 +94,9 @@ export const quote = {
   title: 'Fale com os nossos engenheiros agora mesmo!',
   text: 'Descubra como a locação de compressores da Falanga pode fazer a diferença no seu negócio. Preencha o formulário ou fale direto conosco pelo WhatsApp.',
   trust: [
-    { icon: 'wrench', label: 'Manutenção inclusa' },
-    { icon: 'cpu', label: 'Compressores Schulz' },
-    { icon: 'pin', label: 'Atendimento em todo o Nordeste' },
+    { icon: 'clock', label: 'Resposta rápida' },
+    { icon: 'gauge', label: 'Compressor dimensionado' },
+    { icon: 'tag', label: 'Sem custo de compra' },
   ],
 } as const satisfies {
   eyebrow: string
