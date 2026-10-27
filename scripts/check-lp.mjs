@@ -714,8 +714,15 @@ if (manifest) {
     }
 
     for (let i = 1; i < list.length; i++)
-      if (list[i].carriesNavy && list[i - 1].carriesNavy)
-        fail(MANIFEST, `"${list[i - 1].slug}" e "${list[i].slug}" são dois blocos navy vizinhos`)
+      if (list[i].carriesNavy && list[i - 1].carriesNavy) {
+        // Falanga Locação: sem a seção de aplicações entre os dois, a dispensa (`adjacentNavyWaivers`,
+        // chave "<anterior>+<seguinte>") com o motivo registrado vira aviso.
+        const pair = `${list[i - 1].slug}+${list[i].slug}`
+        const adj = manifest.adjacentNavyWaivers?.[pair]
+        if (adj) warn(MANIFEST, `"${pair}" são dois blocos navy vizinhos, dispensado: ${adj}`)
+        else
+          fail(MANIFEST, `"${list[i - 1].slug}" e "${list[i].slug}" são dois blocos navy vizinhos`)
+      }
   }
 
   /* B4. Respiro vertical --------------------------------------------------- */

@@ -341,21 +341,31 @@
   --section-space: 70px;
 }
 
-/* Diferenciais → cotação: os dois fundos são claros e quase iguais, e a curva mal aparece; só o
-   respiro de baixo dos diferenciais fica entre eles (mesma regra das outras LPs Falanga). */
-#main > #diferenciais + #cotacao,
-#main > #diferenciais + script + #cotacao {
+/* Duas seções seguidas no mesmo fundo: a curva não aparece e os dois respiros somados
+   abriam um vão de ~190px. A segunda perde o respiro de cima, e o espaço entre elas fica
+   só o --section-space da anterior, igual ao de qualquer borda de seção (26/10/2026).
+   O Astro pode deixar o <script> de uma seção entre ela e a seguinte: daí o `script +`.
+   Os diferenciais ficam de fora, dos dois lados: o bloco navy deles ocupa a largura toda,
+   então visualmente não há fundo igual, e ele sobe sobre o próprio respiro de cima
+   (margin-top negativo em WhyBrand.astro) — sem esse respiro, o texto colava no topo. */
+#main > section.bg-neutral-light:not(#diferenciais) + section.bg-neutral-light:not(#diferenciais),
+#main
+  > section.bg-neutral-light:not(#diferenciais)
+  + script
+  + section.bg-neutral-light:not(#diferenciais),
+#main
+  > section.bg-neutral-gray-100:not(#diferenciais)
+  + section.bg-neutral-gray-100:not(#diferenciais),
+#main
+  > section.bg-neutral-gray-100:not(#diferenciais)
+  + script
+  + section.bg-neutral-gray-100:not(#diferenciais) {
   padding-top: 0;
 }
 
-/* Fundos que dão contraste às curvas: locação branca → orçamento cinza-claro (com o painel
-   navy) → diferenciais do branco ao azul-claro → cotação escura → rodapé navy */
-#identificar {
-  background-color: #f4f6f9;
-}
-
-#diferenciais {
-  background:
-    radial-gradient(1000px 380px at 85% 50%, #ffffff 0%, rgb(255 255 255 / 0) 62%),
-    linear-gradient(180deg, #ffffff 0%, #f8fafc 25%, #f1f5f9 70%, #eef2f7 100%);
+/* Diferenciais → cotação: os cards brancos do fim dos diferenciais já ficam sobre o cinza da
+   cotação, então vale a mesma regra — só o respiro de baixo dos diferenciais entre eles. */
+#main > #diferenciais + #cotacao,
+#main > #diferenciais + script + #cotacao {
+  padding-top: 0;
 }

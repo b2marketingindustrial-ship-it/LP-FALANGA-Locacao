@@ -113,7 +113,7 @@
       "component": "WhyBrand.astro",
       "data": "diferenciais.ts",
       "dataExport": "why",
-      "carriesNavy": false,
+      "carriesNavy": true,
       "tone": "gray",
       "rhythm": "uniform",
       "tones": [
@@ -125,7 +125,9 @@
         "uniform"
       ],
       "exampleHash": "24683935274bbad0",
-      "ctas": [],
+      "ctas": [
+        "diferenciais-cta"
+      ],
       "contract": {
         "itemsPath": "reasons",
         "itemsMin": 5,
@@ -140,13 +142,32 @@
           "item.description": 70
         }
       },
-      "assets": []
+      "assets": [
+        {
+          "dir": "diferenciais",
+          "match": "cenario",
+          "files": "cenario.jpg",
+          "spec": "Cenário/bancada 1600×900, sangra à direita do bloco navy",
+          "width": 1600,
+          "height": 900,
+          "alpha": false
+        },
+        {
+          "dir": "diferenciais",
+          "match": "pessoa",
+          "files": "pessoa.png",
+          "spec": "Pessoa recortada de corpo inteiro, 1220×1000, fundo transparente",
+          "width": 1220,
+          "height": 1000,
+          "alpha": true
+        }
+      ]
     }
   ],
   "phaseWaivers": {
     "prova": "A LP antiga da Falanga não traz prova (clientes, números com fonte, depoimentos); fase vazia até haver material (docs/BRIEFING.md, Desvios)"
   },
-  "navyWaivers": {
-    "autoridade": "Diferenciais em seção clara, como na LP Spinplus; o bloco navy da página fica no painel de orçamento (22/10/2026)"
+  "adjacentNavyWaivers": {
+    "identificar+diferenciais": "A LP de locação não tem a seção de aplicações que separa o painel de orçamento do bloco navy dos diferenciais nas outras LPs Falanga; o painel é um cartão navy dentro de seção clara (27/10/2026)"
   }
 }
