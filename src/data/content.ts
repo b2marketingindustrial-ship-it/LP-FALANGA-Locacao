@@ -66,17 +66,17 @@ export const hero = {
   title: 'Locação de Compressores',
   /** Manchete em duas linhas: `headline` em branco e `highlight[0]` em amarelo na primeira; o resto de `highlight` na segunda. */
   headline: ['Sua produção'],
-  highlight: ['não para.', 'Manutenção inclusa.'],
-  text: 'Aluguel de compressores de ar com qualidade, flexibilidade e economia: o equipamento certo, onde a sua indústria precisar.',
+  highlight: ['não para.', 'Compressores prontos para alugar.'],
+  text: 'Frota de compressores de parafuso Schulz para locação, com manutenção inclusa e atendimento em todo o Nordeste desde 1981.',
   banner: {
     src: heroBg,
     alt: 'Compressores de parafuso Schulz SRP 4030, SRP 4030 Total Solution e SRP 5100 da frota de locação',
   },
   points: [
     { icon: 'wrench', line1: 'Manutenção', line2: 'inclusa' },
-    { icon: 'cpu', line1: 'Compressores', line2: 'Schulz' },
-    { icon: 'map-pin', line1: 'Atendimento', line2: 'no Nordeste' },
-    { icon: 'users', line1: 'Equipe', line2: 'especializada' },
+    { icon: 'cpu', line1: 'Frota', line2: 'Schulz' },
+    { icon: 'trophy', line1: 'Desde', line2: '1981' },
+    { icon: 'map-pin', line1: 'Fortaleza', line2: 'e Recife' },
   ],
 } as const satisfies {
   title: string
