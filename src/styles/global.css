@@ -44,7 +44,7 @@
   --color-brand-yellow-soft: #feedab;
   --color-brand-mist: #ecf1f9;
 
-  --container-page: 1320px;
+  --container-page: 1450px;
 
   /* Uma única família para títulos e corpo; o peso e o tracking fazem a hierarquia. */
   --font-display: 'Manrope', ui-sans-serif, system-ui, sans-serif;
@@ -336,6 +336,12 @@
 
 #main + footer {
   z-index: 0;
+}
+
+/* Respiro vertical único de toda seção, em cima e embaixo: 70px em todas as larguras (padrão das
+   LPs Falanga, 23/10/2026). O ritmo `uniform` (src/lib/rhythm.mjs) aplica este valor. */
+:root {
+  --section-space: 70px;
 }
 
 /* Fundos que dão contraste às curvas: locação branca → orçamento cinza-claro (com o painel

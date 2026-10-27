@@ -26,14 +26,15 @@
       "dataExport": "rental",
       "carriesNavy": false,
       "tone": "light",
-      "rhythm": "open",
+      "rhythm": "uniform",
       "tones": [
         "light",
         "gray"
       ],
       "rhythms": [
         "open",
-        "even"
+        "even",
+        "uniform"
       ],
       "ctas": [
         "locacao-cta"
@@ -75,13 +76,14 @@
       "dataExport": "supportPanel",
       "carriesNavy": true,
       "tone": "light",
-      "rhythm": "panel-lead",
+      "rhythm": "uniform",
       "tones": [
         "light",
         "gray"
       ],
       "rhythms": [
-        "panel-lead"
+        "panel-lead",
+        "uniform"
       ],
       "exampleHash": "dfa6bcf7c0258bb1",
       "ctas": [
@@ -113,13 +115,14 @@
       "dataExport": "why",
       "carriesNavy": false,
       "tone": "gray",
-      "rhythm": "overlap",
+      "rhythm": "uniform",
       "tones": [
         "light",
         "gray"
       ],
       "rhythms": [
-        "overlap"
+        "overlap",
+        "uniform"
       ],
       "exampleHash": "24683935274bbad0",
       "ctas": [],

@@ -8,7 +8,15 @@
 export type Tone = 'light' | 'gray'
 
 export type Rhythm =
-  'open' | 'even' | 'tight' | 'flow' | 'panel-lead' | 'panel-tight' | 'centered-lead' | 'overlap'
+  | 'open'
+  | 'even'
+  | 'tight'
+  | 'flow'
+  | 'panel-lead'
+  | 'panel-tight'
+  | 'centered-lead'
+  | 'overlap'
+  | 'uniform'
 
 /** Props que toda seção da biblioteca recebe da página. */
 export interface SectionProps {
