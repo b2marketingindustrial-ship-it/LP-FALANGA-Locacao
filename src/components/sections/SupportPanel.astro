@@ -85,16 +85,16 @@ const highlight = cut >= 0 ? supportPanel.highlight : ''
           aria-label="Dados que ajudam no orçamento da locação"
         >
           {items.map((item) => (
-            <li class="support-card flex h-full flex-col rounded-2xl border border-[#1f5fa8]/80 bg-white/[0.03] px-5 py-5">
+            <li class="support-card flex h-full flex-col gap-3 rounded-2xl border border-[#1f5fa8]/80 bg-white/[0.04] px-5 py-5">
               <div class="flex items-center gap-3">
-                <Icon name={item.icon} class="size-6 shrink-0 text-brand-yellow" />
+                <span class="support-icon flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand-yellow/20 text-brand-yellow ring-1 ring-brand-yellow/25">
+                  <Icon name={item.icon} class="size-6" />
+                </span>
                 <p class="font-display text-[16px] leading-snug font-extrabold text-neutral-light xl:text-[17px]">
                   {item.label}
                 </p>
               </div>
-              <p class="mt-2.5 font-sans text-[14px] leading-relaxed text-neutral-light/75">
-                {item.hint}
-              </p>
+              <p class="font-sans text-[14px] leading-relaxed text-neutral-light/80">{item.hint}</p>
             </li>
           ))}
         </ul>
@@ -126,15 +126,31 @@ const highlight = cut >= 0 ? supportPanel.highlight : ''
   }
 
   .support-card {
-    transition: background-color 260ms ease;
+    transition:
+      background-color 260ms ease,
+      border-color 260ms ease;
   }
 
+  .support-icon {
+    transition:
+      background-color 260ms ease,
+      color 260ms ease;
+  }
+
+  /* Ao passar o mouse, o ícone enche de amarelo e o card ganha contorno. */
   .support-card:hover {
-    background-color: rgb(255 255 255 / 0.06);
+    background-color: rgb(255 255 255 / 0.08);
+    border-color: rgb(253 224 1 / 0.45);
+  }
+
+  .support-card:hover .support-icon {
+    background-color: var(--color-brand-yellow);
+    color: var(--color-primary-dark-900);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .support-card {
+    .support-card,
+    .support-icon {
       transition: none;
     }
   }

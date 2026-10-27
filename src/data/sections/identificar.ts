@@ -30,10 +30,10 @@ export const supportPanel = {
   cta: 'Solicite sua cotação',
   items: [
     { icon: 'gauge', label: 'Pressão', hint: 'de trabalho, em bar' },
-    { icon: 'move', label: 'Vazão', hint: 'consumo de ar' },
+    { icon: 'wind', label: 'Vazão', hint: 'consumo de ar' },
     { icon: 'bolt', label: 'Potência', hint: 'em HP ou kW' },
     { icon: 'clock', label: 'Período', hint: 'tempo de locação' },
-    { icon: 'zap', label: 'Tensão', hint: 'da rede elétrica' },
+    { icon: 'plug', label: 'Tensão', hint: 'da rede elétrica' },
     { icon: 'map-pin', label: 'Local', hint: 'cidade da operação' },
   ],
 } as const satisfies {

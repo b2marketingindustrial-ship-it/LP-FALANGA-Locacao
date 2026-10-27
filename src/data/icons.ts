@@ -89,6 +89,10 @@ export const iconPaths = {
     '<rect x="2.8" y="6.8" width="10.6" height="9.4" rx="1"/><path d="M13.4 10.2h3.3l2.8 3v3h-6.1z"/><circle cx="7" cy="18" r="1.7"/><circle cx="16.4" cy="18" r="1.7"/>',
   barcode: '<path d="M4 5v14M7.2 5v14M9.6 5v14M13 5v14M15.4 5v14M18 5v14M20.5 5v14"/>',
   'trend-up': '<path d="M3.5 16.5 9 11l4 4 7.5-8.5"/><path d="M15 6.5h5.5V12"/>',
+  /** Fluxo de ar: vazão (painel de orçamento da locação, 27/10/2026). */
+  wind: '<path d="M3 8h10.5a2.5 2.5 0 1 0-2.5-2.5"/><path d="M3 12h15.5a2.5 2.5 0 1 1-2.5 2.5"/><path d="M3 16h7a2 2 0 1 1-2 2"/>',
+  /** Plugue: tensão da rede elétrica (painel de orçamento da locação, 27/10/2026). */
+  plug: '<path d="M9 3v5"/><path d="M15 3v5"/><path d="M6 8h12v3a6 6 0 0 1-12 0V8Z"/><path d="M12 17v4"/>',
   power: '<path d="M12 3.5v8"/><path d="M6.6 6.9a8 8 0 1 0 10.8 0"/>',
   refresh: '<path d="M20.2 12a8.2 8.2 0 1 1-2.6-6"/><path d="M20.5 4.2v4.6h-4.6"/>',
   'help-circle':
