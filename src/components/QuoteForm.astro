@@ -1,142 +1,92 @@
 ---
 /**
- * ESTRUTURA FIXA (PROMPT-PADRAO-LP 4.1.4), na versão Falanga.
+ * ESTRUTURA FIXA (PROMPT-PADRAO-LP 4.1.4). Grid 1.05fr · 1fr: formulário (shortcode) à esquerda, texto à direita.
+ * Mobile: texto antes do formulário. O formulário é sempre o shortcode, nunca um <form> próprio.
  *
- * Mesmo desvio do padrão aprovado na LP Spinplus (docs/BRIEFING.md, "Desvios"): faixa
- * escura; título, texto e os três pontos do fechamento da LP antiga à esquerda; à direita,
- * o espaço do formulário. Fundo navy com malha técnica e brilho amarelo, sem foto.
- * Mobile: texto antes do formulário.
- *
- * Os dois espaços ficam vazios para o plugin de atendimento do WordPress preencher:
- * o botão de WhatsApp entra em `data-whatsapp-slot` e o formulário é o shortcode, nunca
- * um <form> próprio. Onde o plugin não roda (Vercel), o shortcode cru fica escondido.
+ * Padrão das LPs Falanga (27/10/2026), no lugar da faixa navy herdada da Spinplus: a coluna do
+ * formulário traz só o espaço do shortcode, sem card, título nem nota de LGPD — o plugin de
+ * atendimento do WordPress troca o shortcode pelo formulário, e o espaço não define fonte, cor
+ * nem alinhamento do conteúdo. A coluna de texto segue nas cores da Falanga.
  */
 import Icon from './Icon.astro'
-import RichText from './RichText.astro'
-import { quote } from '../data/content'
-import { site } from '../data/site'
+import { quote, cta } from '../data/content'
+
+const isDev = import.meta.env.DEV
 ---
 
-<section
-  id="cotacao"
-  class="quote-fal relative isolate overflow-hidden bg-primary-dark-900 py-16 lg:py-24"
-  data-quote="falanga"
->
-  {/* Fundo: navy com malha técnica e brilho amarelo atrás do formulário */}
-  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
-    <span class="blueprint-grid absolute inset-0"></span>
-    <span class="quote-fal__glow absolute"></span>
-    <span class="quote-fal__lines absolute hidden lg:block"></span>
-  </div>
-
+<section id="cotacao" class="bg-neutral-gray-100 py-(--section-space)">
   <div class="page-container">
-    <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.85fr)] lg:gap-14">
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-center lg:gap-16">
+      {/* Coluna do formulário: só o espaço do shortcode, sem card nem textos (pedido do usuário, 23/10/2026) */}
+      <div class="order-2 w-full lg:order-1">
+        {/* Espaço do formulário: só o shortcode, sem estilo de texto */}
+        <div class="quote-slot min-h-[380px] w-full">
+          <slot name="shortcode">
+            {isDev ? (
+              <div
+                class="flex min-h-[380px] w-full flex-col gap-3"
+                aria-label="Mock do formulário (só em desenvolvimento)"
+              >
+                <div class="grid gap-3 sm:grid-cols-2">
+                  <div class="h-12 rounded-xl border border-neutral-gray-200/70 bg-neutral-gray-100" />
+                  <div class="h-12 rounded-xl border border-neutral-gray-200/70 bg-neutral-gray-100" />
+                  <div class="h-12 rounded-xl border border-neutral-gray-200/70 bg-neutral-gray-100" />
+                  <div class="h-12 rounded-xl border border-neutral-gray-200/70 bg-neutral-gray-100" />
+                  <div class="h-12 rounded-xl border border-neutral-gray-200/70 bg-neutral-gray-100 sm:col-span-2" />
+                  <div class="h-24 rounded-xl border border-neutral-gray-200/70 bg-neutral-gray-100 sm:col-span-2" />
+                </div>
+                <div class="mt-auto h-14 w-full rounded-xl bg-primary-dark/80" />
+              </div>
+            ) : (
+              <div class="flex min-h-[380px] w-full flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-primary-dark/25 p-8 text-center">
+                <span class="font-sans text-[11px] font-semibold tracking-[0.18em] text-brand-blue uppercase">
+                  Espaço reservado
+                </span>
+                <p class="font-display text-lg font-bold text-ink">
+                  Shortcode — formulário de cotação
+                </p>
+              </div>
+            )}
+          </slot>
+        </div>
+      </div>
+
       {/* Coluna de texto */}
-      <div>
-        <h2 class="font-display title-section leading-[1.12] font-normal tracking-[-0.01em] text-neutral-light">
-          <RichText parts={quote.title} strongClass="font-extrabold text-brand-yellow" />
+      <div class="order-1 lg:order-2">
+        <p class="flex items-center gap-4 font-sans text-[12px] font-bold tracking-[0.2em] text-primary-dark/80 uppercase">
+          <span
+            aria-hidden="true"
+            class="h-[4px] w-10 shrink-0 rounded-full bg-brand-yellow"
+          ></span>
+          {quote.eyebrow}
+        </p>
+        <h2 class="mt-3 font-display title-section leading-[1.08] font-extrabold tracking-[-0.03em] text-primary-dark">
+          {quote.title}
         </h2>
 
-        <p class="mt-5 max-w-2xl font-sans text-[17px] leading-relaxed text-neutral-light/80 xl:text-lg">
-          <RichText parts={quote.text} strongClass="font-bold text-neutral-light" />
-        </p>
+        <span
+          aria-hidden="true"
+          class="mt-5 block h-[4px] w-16 rounded-full bg-brand-yellow"
+        ></span>
 
-        <ul class="mt-7 flex flex-col gap-3">
-          {quote.points.map((point) => (
-            <li class="flex items-center gap-3 font-sans text-[15px] leading-snug text-neutral-light/90 sm:text-base">
-              <span class="flex size-7 shrink-0 items-center justify-center rounded-full bg-brand-yellow text-primary-dark-900">
-                <Icon name="check" class="size-4" />
-              </span>
-              {point}
+        <p class="mt-5 font-sans text-lead text-ink-soft">{quote.text}</p>
+
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <button type="button" data-cta="cotacao-whatsapp" class="btn-slave-whats cta cta-blue">
+            {cta.whatsapp}
+            <Icon name="arrow-right" class="shrink-0" />
+          </button>
+        </div>
+
+        <ul class="mt-7 flex flex-wrap gap-x-6 gap-y-2.5">
+          {quote.trust.map((item) => (
+            <li class="flex items-center gap-2 font-sans text-[13px] font-medium text-ink">
+              <Icon name={item.icon} class="size-4 shrink-0 text-brand-blue" />
+              {item.label}
             </li>
           ))}
         </ul>
-
-        {/* Espaço reservado para o botão de WhatsApp do plugin (entra no WordPress) */}
-        <div
-          data-cta="cotacao-whatsapp"
-          data-whatsapp-slot
-          class="mt-8 flex min-h-[60px] items-center"
-        ></div>
-      </div>
-
-      {/* Espaço do formulário: o plugin renderiza o shortcode aqui (entra no WordPress) */}
-      <div>
-        <div class="min-h-[420px] lg:min-h-[520px]" data-quote-slot>
-          <slot name="shortcode" />
-        </div>
-
-        {/* Nota de LGPD */}
-        <p class="mt-4 font-sans text-[11px] leading-relaxed text-neutral-light/65">
-          {quote.lgpd}
-          {site.privacyUrl && (
-            <>
-              {' '}
-              <a
-                href={site.privacyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="font-semibold text-neutral-light/90 underline-offset-2 hover:underline"
-              >
-                Política de privacidade
-              </a>
-              .
-            </>
-          )}
-        </p>
       </div>
     </div>
   </div>
 </section>
-
-<style>
-  .quote-fal {
-    background:
-      radial-gradient(1000px 520px at 0% 0%, rgb(40 88 168 / 0.45) 0%, transparent 60%),
-      linear-gradient(165deg, #0d2a5c 0%, #071a3a 55%, #04122a 100%);
-  }
-
-  .quote-fal__glow {
-    top: 50%;
-    right: -10%;
-    width: 760px;
-    height: 760px;
-    transform: translateY(-50%);
-    border-radius: 9999px;
-    background: radial-gradient(circle, rgb(248 232 24 / 0.12) 0%, transparent 65%);
-  }
-
-  /* Riscos de velocidade da logo no canto superior direito */
-  .quote-fal__lines {
-    top: 56px;
-    right: 0;
-    width: 280px;
-    height: 70px;
-    background: repeating-linear-gradient(
-      180deg,
-      rgb(248 232 24 / 0.55) 0 4px,
-      transparent 4px 14px
-    );
-    mask-image: linear-gradient(to left, black 20%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to left, black 20%, transparent 100%);
-  }
-</style>
-
-<script>
-  // O plugin do WordPress troca o shortcode pelo formulário. Onde ele não roda (Vercel),
-  // sobra o texto cru do shortcode: ele fica invisível e o espaço segue vazio. O observer
-  // cobre o plugin que renderiza depois do carregamento.
-  document.querySelectorAll<HTMLElement>('[data-quote-slot]').forEach((slot) => {
-    const sync = () => {
-      const raw = !slot.querySelector('*') && (slot.textContent ?? '').trim().startsWith('[')
-      slot.style.visibility = raw ? 'hidden' : ''
-    }
-
-    sync()
-    new MutationObserver(sync).observe(slot, {
-      childList: true,
-      subtree: true,
-      characterData: true,
-    })
-  })
-</script>

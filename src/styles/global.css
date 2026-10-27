@@ -344,6 +344,13 @@
   --section-space: 70px;
 }
 
+/* Diferenciais → cotação: os dois fundos são claros e quase iguais, e a curva mal aparece; só o
+   respiro de baixo dos diferenciais fica entre eles (mesma regra das outras LPs Falanga). */
+#main > #diferenciais + #cotacao,
+#main > #diferenciais + script + #cotacao {
+  padding-top: 0;
+}
+
 /* Fundos que dão contraste às curvas: locação branca → orçamento cinza-claro (com o painel
    navy) → diferenciais do branco ao azul-claro → cotação escura → rodapé navy */
 #identificar {

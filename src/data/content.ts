@@ -17,14 +17,16 @@ import schulz from '@assets/schulz.png'
 
 /* ------------------------------------------------------------------ tipos */
 
+export interface TrustItem {
+  icon: IconName
+  label: string
+}
+
 export interface HeroPoint {
   icon: IconName
   line1: string
   line2: string
 }
-
-/** Trecho de texto com destaque: `strong` em negrito, `accent` em negrito azul. */
-export type RichText = readonly (string | { strong: string } | { accent: string })[]
 
 /* ----------------------------------------------------------- vocabulário */
 
@@ -87,32 +89,20 @@ export const hero = {
 
 /* ----------------------------------------------------------------- cotação */
 
-/**
- * Cotação: faixa navy com o convite da LP antiga à esquerda e o formulário do plugin à
- * direita. Os três pontos vêm do fechamento da LP antiga ("Ajudamos as indústrias…").
- */
 export const quote = {
-  /** H2: o trecho `strong` em extrabold, o resto em peso regular. */
-  title: [{ strong: 'Fale com os nossos engenheiros' }, ' agora mesmo!'],
-  text: [
-    'Entre em contato e descubra como a ',
-    { strong: 'locação de compressores' },
-    ' da ',
-    { strong: site.brand },
-    ' pode fazer a diferença no seu negócio, com uma equipe de especialistas pronta para te atender.',
+  eyebrow: 'Solicite sua cotação',
+  title: 'Fale com os nossos engenheiros agora mesmo!',
+  text: 'Descubra como a locação de compressores da Falanga pode fazer a diferença no seu negócio. Preencha o formulário ou fale direto conosco pelo WhatsApp.',
+  trust: [
+    { icon: 'wrench', label: 'Manutenção inclusa' },
+    { icon: 'cpu', label: 'Compressores Schulz' },
+    { icon: 'pin', label: 'Atendimento em todo o Nordeste' },
   ],
-  points: [
-    'Ar comprimido de excelência, com eficiência e confiabilidade',
-    'Redução de custos de manutenção e de energia',
-    'Fornecimento ágil e suporte técnico contínuo',
-  ],
-  /** Nota de LGPD exibida abaixo do formulário. */
-  lgpd: `Seus dados são usados apenas para responder à sua solicitação de orçamento, conforme a LGPD.`,
 } as const satisfies {
-  title: RichText
-  text: RichText
-  points: readonly string[]
-  lgpd: string
+  eyebrow: string
+  title: string
+  text: string
+  trust: readonly [TrustItem, TrustItem, TrustItem]
 }
 
 /* ------------------------------------------------------------------ footer */
