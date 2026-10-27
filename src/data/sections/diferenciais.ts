@@ -24,7 +24,7 @@ export interface Reason {
 export const why = {
   eyebrow: `Por que a ${site.brandShort}`,
   /** Cada item é uma linha do H2 (quebra forçada): as duas primeiras em branco, a última em amarelo. */
-  titleLines: ['Ar comprimido para', 'a sua indústria,', 'sem comprar equipamento.'],
+  titleLines: ['Ar comprimido para', 'a sua indústria,', 'sem imobilizar capital.'],
   /** Cada `\n` é uma quebra forçada a partir de 1280px; abaixo disso o texto corre normal. */
   text: 'Aluguel de compressores rápido, confiável e personalizado\npara a rotina da sua operação.',
   cta: 'Solicitar cotação',
@@ -41,22 +41,22 @@ export const why = {
     {
       icon: 'sliders',
       title: 'Adaptabilidade',
-      description: 'Ajuste a capacidade à demanda e mantenha o fluxo de caixa saudável.',
+      description: 'Ajuste a capacidade à demanda e preserve o caixa.',
     },
     {
       icon: 'gauge',
       title: 'Capacidade sob medida',
-      description: 'Compressor dimensionado para a vazão e a pressão da sua operação.',
+      description: 'Dimensionado para a vazão e a pressão da operação.',
     },
     {
       icon: 'truck',
       title: 'Fornecimento ágil',
-      description: 'Compressor da frota disponível rapidamente para a sua operação.',
+      description: 'Equipamento da frota disponível para a sua operação.',
     },
     {
       icon: 'users',
       title: 'Assistência contínua',
-      description: 'Suporte técnico especializado durante todo o período de locação.',
+      description: 'Suporte técnico especializado durante a locação.',
     },
   ],
 } as const satisfies {

@@ -22,7 +22,7 @@ export interface RentalUse {
 export const rental = {
   eyebrow: 'Aluguel de compressores',
   title: 'Eficiência, confiabilidade e economia para a sua indústria',
-  text: 'Locação da Falanga: ar comprimido de qualidade para a produtividade da sua indústria, sem imobilizar capital em equipamento.',
+  text: 'Locação da Falanga: ar comprimido de qualidade para a produtividade da sua indústria, sem precisar comprar o equipamento.',
   photo: {
     src: frota,
     alt: 'Compressores de parafuso Schulz SRP 4030 da frota de locação da Falanga Pneumática instalados em sala de compressores',

@@ -68,7 +68,7 @@ Aplicada à mão em `22/10/2026` (a biblioteca de seções não está nesta past
 | 3   | PRODUTO_PRINCIPAL       | extraído   | Locação de compressores                                                                                                                                                                         |                                                    |
 | 4   | CONTEXTO_DE_USO         | inferido   | indústrias no Nordeste                                                                                                                                                                          |                                                    |
 | 6   | HERO                    | decidido   | H1 "Locação de Compressores" na pílula; manchete "Sua produção não para. / Compressores para alugar."; 4 pontos (Manutenção inclusa, Frota Schulz, Desde 1981, Fortaleza e Recife) (27/10/2026) |
-| 7   | MARCAS_ATENDIDAS        | decidido   | Schulz só em texto: sem logo no header, nos diferenciais e no rodapé (autorização de marca não solicitada), como nas LPs de peças e manutenção (27/10/2026)                                     |
+| 7   | MARCAS_ATENDIDAS        | decidido   | Logo Schulz no header, ao lado da Falanga, como na LP de parafuso (pedido do usuário, 27/10/2026); sem logo Schulz nos diferenciais e no rodapé                                                 |
 | 8   | SELOS_DE_CONFIANCA      | decidido   | Manutenção inclusa · Desde 1981 · Fortaleza e Recife (hero); itens da cotação: Resposta rápida, Compressor dimensionado, Sem custo de compra                                                    |
 | 9   | ENDERECO                | decidido   | R. Mirian Rocha, 97 - Fortaleza - CE · Rua Tomaz Gonzaga, 74 - Zumbi, Recife - PE (igual às outras LPs Falanga)                                                                                 |
 | 10  | URL_FINAL + PRIVACIDADE | decidido   | `https://falangapneumatica.com.br/locacao-de-compressores/` (27/10/2026; a página `-2025` precisa ser substituída ou redirecionada) · sem política de privacidade                               |
@@ -97,14 +97,14 @@ Em 27/10/2026 a LP foi realinhada às LPs de parafuso, peças e manutenção (re
 | Diferenciais | bloco navy com a foto `cenario.jpg` (a mesma das outras LPs) e os 5 cards de locação sobrepostos                                            | vizinho do painel de orçamento: `adjacentNavyWaivers` no manifesto e no `check-lp.mjs`        |
 | Versão       | continua em `2.7.1`: o fluxo da ficha (`npm run ficha`, v2.8.0) não foi aplicado                                                            | subir de versão exige trazer `ficha.mjs` e a `FICHA-LP.md`                                    |
 
-Já no padrão (cores iguais às das outras três LPs, `brand-blue` no lugar de `brand`): header (filete amarelo-azul, tagline com selo, CTA, sem logo Schulz), hero navy com pílula, H1 grande e área atendida, malha e chat de 340px, contêiner de 1450px, 70px entre seções (`uniform`), `title-section`/`text-lead`, botões `.cta`, cotação só com o shortcode (sem card nem LGPD), rodapé de uma linha, sem WhatsApp flutuante.
+Já no padrão (cores iguais às das outras três LPs, `brand-blue` no lugar de `brand`): header (filete amarelo-azul, logos Falanga e Schulz, tagline "Locação de compressores parafuso" com selo, CTA), hero navy com pílula, H1 grande e área atendida, malha e chat de 340px, contêiner de 1450px, 70px entre seções (`uniform`), `title-section`/`text-lead`, botões `.cta`, cotação só com o shortcode (sem card nem LGPD), rodapé de uma linha, sem WhatsApp flutuante.
 
 ## Pendências para o cliente
 
 1. **Marca dos compressores:** a LP antiga dizia "Compressores Ingersoll Rand" no card "Alta tecnologia" e "SCHULZ" no resto da página e em todas as imagens. O card foi reescrito (Capacidade sob medida) e a Schulz só aparece em texto.
 2. Logo Falanga em alta resolução (ou vetor) e a foto da frota em tamanho original.
 3. Validar os 6 dados do orçamento (Pressão, Vazão, Potência, Período, Tensão, Local) e as descrições dos cards "Emergências" e "Planejamento estratégico".
-4. Substituir ou redirecionar a página `-2025`, política de privacidade e confirmar se (85) 98129-5507 é o WhatsApp comercial. Autorização de uso da marca Schulz (hoje só em texto).
+4. Substituir ou redirecionar a página `-2025`, política de privacidade e confirmar se (85) 98129-5507 é o WhatsApp comercial. Autorização de uso da marca Schulz (a logo está no header; no restante da página a Schulz aparece só em texto).
 5. Material de prova (clientes atendidos, números com fonte, depoimentos) para preencher a fase vazia.
 
 ## Aprovação

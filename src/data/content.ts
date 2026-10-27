@@ -10,7 +10,6 @@
  */
 import type { IconName } from './icons'
 import type { Photo } from './types'
-import { site } from './site'
 
 import heroBg from '@assets/heroBg.webp'
 
@@ -41,11 +40,11 @@ export const cta = {
 /* ------------------------------------------------------------------ header */
 
 /**
- * Header no padrão das LPs Falanga: logo, tagline com selo e CTA. Sem logo Schulz: a autorização
- * de uso da marca não foi solicitada (como nas LPs de peças e manutenção).
+ * Header no padrão das LPs Falanga: logos Falanga e Schulz (como na LP de parafuso, a pedido do
+ * usuário em 27/10/2026), tagline com selo e CTA.
  */
 export const header = {
-  tagline: site.product,
+  tagline: 'Locação de compressores parafuso',
   /** Rótulo do CTA do header no desktop (mesmo das outras LPs Falanga). */
   cta: 'Fale com um especialista',
 } as const satisfies {
@@ -63,7 +62,7 @@ export const hero = {
    * campanha. `tail` completa a frase comercial nas linhas seguintes, em amarelo.
    */
   title: 'Locação de compressores',
-  tail: ['Schulz para a', 'sua indústria.'],
+  tail: ['Schulz para a indústria.'],
   text: 'Frota de compressores de parafuso Schulz para locação, com manutenção inclusa e equipe técnica especializada.',
   /** Linha de área atendida abaixo do CTA, separada por ponto. */
   area: ['Unidades em Fortaleza e Recife', 'Atendimento em todo o Nordeste'],
