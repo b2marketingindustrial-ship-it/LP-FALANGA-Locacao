@@ -81,13 +81,9 @@ const { tone, rhythm } = Astro.props
         ))}
       </ul>
 
-      <button
-        type="button"
-        data-cta="locacao-cta"
-        class="btn-slave-whats rental-cta mt-8 inline-flex items-center justify-center gap-3 rounded-md bg-brand-yellow px-8 py-4 font-sans text-[16px] font-extrabold text-primary-dark-900 shadow-[0_16px_30px_-14px_rgba(180,160,0,0.8)] sm:text-[17px]"
-      >
+      <button type="button" data-cta="locacao-cta" class="btn-slave-whats cta cta-blue mt-8">
         {cta.card}
-        <Icon name="arrow-right" class="size-5 shrink-0" />
+        <Icon name="arrow-right" class="shrink-0" />
       </button>
     </div>
   </div>
@@ -103,26 +99,5 @@ const { tone, rhythm } = Astro.props
     background: repeating-linear-gradient(180deg, var(--color-brand) 0 4px, transparent 4px 13px);
     mask-image: linear-gradient(to left, black 20%, transparent 100%);
     -webkit-mask-image: linear-gradient(to left, black 20%, transparent 100%);
-  }
-
-  .rental-cta {
-    transition:
-      transform 200ms ease-out,
-      filter 200ms ease-out;
-  }
-
-  .rental-cta:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.04);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .rental-cta {
-      transition: none;
-    }
-
-    .rental-cta:hover {
-      transform: none;
-    }
   }
 </style>
