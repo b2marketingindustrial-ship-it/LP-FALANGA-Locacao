@@ -20,6 +20,8 @@ export interface SupportItem {
 export const supportPanel = {
   eyebrow: 'Orçamento sob medida',
   title: 'Conheça nossas soluções sob medida para a sua indústria',
+  /** Trecho final do título, em amarelo (precisa existir dentro de `title`). */
+  highlight: 'sob medida para a sua indústria',
   text: 'Não precisa ter todos os dados em mãos. Envie o que souber da sua operação e nossa equipe de especialistas indica o compressor certo para locação.',
   microcopy: 'Retorno da nossa equipe de especialistas',
   /** Rótulo da faixa com os 6 dados. */
@@ -35,6 +37,7 @@ export const supportPanel = {
 } as const satisfies {
   eyebrow: string
   title: string
+  highlight: string
   text: string
   microcopy: string
   itemsTitle: string

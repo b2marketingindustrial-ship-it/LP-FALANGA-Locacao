@@ -90,15 +90,14 @@ Aplicada à mão em `22/10/2026` (a biblioteca de seções não está nesta past
 
 Em 27/10/2026 a LP foi realinhada às LPs de parafuso, peças e manutenção (regras em decisão ponto a ponto com o usuário). O que ainda difere do padrão:
 
-| Peça         | O que muda                                                                                                                      | Consequência                                                                                  |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Cores        | `brand` (azul) e `brand-yellow` (#ffe300) do mockup do hero de 22/10, mais vivos que os das outras LPs; navy puxado para o azul | tokens próprios em `global.css`; `brand-blue` e `brand-yellow-soft` vieram das outras LPs     |
-| Locação      | seção `locacao` (foto da frota, selo "1981", dois usos e CTA azul) no lugar da vitrine                                          | **`npm run compose` não a conhece**: restaurar `RentalOverview.astro` e `locacao.ts` pelo git |
-| Orçamento    | `identificar` como painel navy com os 6 dados de orçamento de locação e botão amarelo                                           | `carriesNavy: true` no manifesto                                                              |
-| Diferenciais | bento de 5 cards ao lado do título e da placa com a logo Falanga; último card largo em azul                                     | sem assets próprios                                                                           |
-| Versão       | continua em `2.7.1`: o fluxo da ficha (`npm run ficha`, v2.8.0) não foi aplicado                                                | subir de versão exige trazer `ficha.mjs` e a `FICHA-LP.md`                                    |
+| Peça         | O que muda                                                                                                                                  | Consequência                                                                                  |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Locação      | seção `locacao` (foto da frota com selo "Desde 1981", dois usos e CTA azul) no lugar da vitrine/linhas, no molde de abertura das outras LPs | **`npm run compose` não a conhece**: restaurar `RentalOverview.astro` e `locacao.ts` pelo git |
+| Orçamento    | `identificar` como painel navy (molde do "Como funciona") com os 6 dados de orçamento de locação e botão amarelo                            | `carriesNavy: true` no manifesto                                                              |
+| Diferenciais | bloco navy com a foto `cenario.jpg` (a mesma das outras LPs) e os 5 cards de locação sobrepostos                                            | vizinho do painel de orçamento: `adjacentNavyWaivers` no manifesto e no `check-lp.mjs`        |
+| Versão       | continua em `2.7.1`: o fluxo da ficha (`npm run ficha`, v2.8.0) não foi aplicado                                                            | subir de versão exige trazer `ficha.mjs` e a `FICHA-LP.md`                                    |
 
-Já no padrão: header (filete amarelo-azul, tagline com selo, CTA, sem logo Schulz), hero navy com malha e chat de 340px, contêiner de 1450px, 70px entre seções (`uniform`), `title-section`/`text-lead`, botões `.cta`, cotação só com o shortcode (sem card nem LGPD), rodapé de uma linha, sem WhatsApp flutuante.
+Já no padrão (cores iguais às das outras três LPs, `brand-blue` no lugar de `brand`): header (filete amarelo-azul, tagline com selo, CTA, sem logo Schulz), hero navy com pílula, H1 grande e área atendida, malha e chat de 340px, contêiner de 1450px, 70px entre seções (`uniform`), `title-section`/`text-lead`, botões `.cta`, cotação só com o shortcode (sem card nem LGPD), rodapé de uma linha, sem WhatsApp flutuante.
 
 ## Pendências para o cliente
 

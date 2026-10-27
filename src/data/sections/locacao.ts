@@ -27,13 +27,13 @@ export const rental = {
     src: frota,
     alt: 'Compressores de parafuso Schulz SRP 4030 da frota de locação da Falanga Pneumática instalados em sala de compressores',
   },
-  stat: { value: '1981', label: 'atuando em ar comprimido' },
+  /** Selo em pílula sobre a foto. */
+  badge: { icon: 'trophy', label: 'Desde 1981' },
   items: [
     {
       icon: 'alert',
       title: 'Emergências',
-      description:
-        'Compressor parado? Reponha o ar comprimido rápido e mantenha a produção rodando.',
+      description: 'Reponha o ar comprimido com rapidez e mantenha a produção rodando.',
     },
     {
       icon: 'clipboard-check',
@@ -47,6 +47,6 @@ export const rental = {
   title: string
   text: string
   photo: Photo
-  stat: { value: string; label: string }
+  badge: { icon: IconName; label: string }
   items: readonly [RentalUse, RentalUse]
 }
