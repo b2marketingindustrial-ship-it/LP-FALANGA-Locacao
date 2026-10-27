@@ -5,9 +5,9 @@
  * Abra a página com `?grid=1` para ver as colunas e o início da foto.
  *
  * Hero no padrão das LPs Falanga (27/10/2026), no lugar do mockup claro de 22/10: fundo navy
- * com malha de blueprint; H1 com a palavra-chave na pílula de abertura, manchete em duas
- * linhas (branco e amarelo), os quatro pontos numa barra de vidro e um único CTA do sistema
- * `cta`. Banner (compressores Schulz recortados sobre o navy) ancorado ao fim da coluna de
+ * com malha de blueprint; pílula com a frase de efeito, H1 com a palavra-chave como título
+ * grande (branco, com o fim em amarelo), os quatro pontos numa barra de vidro, um único CTA do
+ * sistema `cta` e a área atendida embaixo. Banner (compressores Schulz recortados sobre o navy) ancorado ao fim da coluna de
  * texto e esmaecido por uma elipse, hero com 100px de respiro acima e abaixo, conteúdo até
  * 1450px (--container-page), coluna de texto de largura fixa e shortcode do chat de 340px,
  * sem card. Registrado em docs/BRIEFING.md (Desvios do padrão).
@@ -49,21 +49,20 @@ const isDev = import.meta.env.DEV
     <div class="hero-grid grid items-center gap-y-12 lg:gap-x-6">
       {/* Coluna 1 — textos */}
       <div class="max-w-xl lg:max-w-none">
-        {/* H1 com a palavra-chave da campanha, na forma de linha de abertura */}
-        {/* Pílula no mesmo tamanho e estilo da LP de compressores de parafuso */}
-        <h1 class="inline-flex items-center gap-2 rounded-full border border-brand-yellow/40 bg-white/[0.06] px-3 py-1 font-sans text-[11px] font-bold tracking-[0.12em] text-brand-yellow uppercase sm:text-[12px]">
+        {/* Pílula com a frase de efeito, como nas LPs de parafuso e manutenção */}
+        <p class="inline-flex items-center gap-2 rounded-full border border-brand-yellow/40 bg-white/[0.06] px-3 py-1 font-sans text-[11px] font-bold tracking-[0.12em] text-brand-yellow uppercase sm:text-[12px]">
           <span aria-hidden="true" class="size-1.5 shrink-0 rounded-full bg-brand-yellow"></span>
-          {hero.title}
-        </h1>
-
-        {/* Manchete visual em duas linhas: `headline` (branco) e o primeiro item de `highlight`
-            (amarelo) abrem a primeira; o resto de `highlight` fecha a segunda. */}
-        <p class="mt-5 font-display text-[2rem] leading-[1.06] font-extrabold tracking-[-0.03em] text-neutral-light sm:text-[2.6rem] lg:text-[2.1rem] xl:text-[2.4rem] 2xl:text-[2.7rem]">
-          <span class="block lg:whitespace-nowrap">
-            {hero.headline.join(' ')} <span class="text-brand-yellow">{hero.highlight[0]}</span>
-          </span>
-          <span class="block text-brand-yellow">{hero.highlight.slice(1).join(' ')}</span>
+          {hero.pill}
         </p>
+
+        {/* H1 com a palavra-chave da campanha como título grande: ela em branco e o fim da frase
+            em amarelo, como nas LPs de parafuso e manutenção. */}
+        <h1 class="mt-5 font-display text-[2rem] leading-[1.06] font-extrabold tracking-[-0.03em] text-neutral-light sm:text-[2.6rem] lg:text-[2.1rem] xl:text-[2.6rem] 2xl:text-[2.9rem]">
+          <span class="block lg:whitespace-nowrap">{hero.title}</span>
+          {hero.tail.map((line) => (
+            <span class="block text-brand-yellow lg:whitespace-nowrap">{line}</span>
+          ))}
+        </h1>
 
         <p class="mt-5 max-w-[32rem] font-sans text-lead text-neutral-light/90">{hero.text}</p>
 
@@ -82,10 +81,24 @@ const isDev = import.meta.env.DEV
           ))}
         </ul>
 
-        <button type="button" data-cta="hero-primary" class="btn-slave-whats cta cta-yellow mt-10">
+        <button type="button" data-cta="hero-primary" class="btn-slave-whats cta cta-yellow mt-9">
           {cta.primary}
           <Icon name="arrow-right" class="shrink-0" />
         </button>
+
+        {/* Área atendida, separada por ponto */}
+        <p class="mt-5 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-sans text-[15px] font-medium text-neutral-light/90">
+          {hero.area.map((item, i) => (
+            <>
+              {i > 0 && (
+                <span aria-hidden="true" class="text-neutral-light/60">
+                  •
+                </span>
+              )}
+              <span>{item}</span>
+            </>
+          ))}
+        </p>
       </div>
 
       {/* Coluna 2 — VAZIA de propósito: janela do banner */}
