@@ -15,11 +15,6 @@ import heroBg from '@assets/heroBg.webp'
 
 /* ------------------------------------------------------------------ tipos */
 
-export interface TrustItem {
-  icon: IconName
-  label: string
-}
-
 export interface HeroPoint {
   icon: IconName
   line1: string
@@ -92,16 +87,10 @@ export const quote = {
   eyebrow: 'Solicite sua cotação',
   title: 'Fale com os nossos engenheiros agora mesmo!',
   text: 'Descubra como a locação de compressores da Falanga pode fazer a diferença no seu negócio. Preencha o formulário ou fale direto conosco pelo WhatsApp.',
-  trust: [
-    { icon: 'clock', label: 'Resposta rápida' },
-    { icon: 'chat', label: 'Formulário ou WhatsApp' },
-    { icon: 'shield', label: 'Dados usados só no orçamento' },
-  ],
 } as const satisfies {
   eyebrow: string
   title: string
   text: string
-  trust: readonly [TrustItem, TrustItem, TrustItem]
 }
 
 /* ------------------------------------------------------------------ footer */

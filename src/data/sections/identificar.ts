@@ -23,9 +23,11 @@ export const supportPanel = {
   /** Trecho final do título, em amarelo (precisa existir dentro de `title`). */
   highlight: 'sob medida para a sua indústria',
   text: 'Não precisa ter todos os dados em mãos. Envie o que souber da sua operação e nossa a equipe indica o compressor certo para locação.',
+  /** Rótulo da lista de dados. */
+  itemsLabel: 'O que agiliza o seu orçamento',
   microcopy: 'Dimensionamento feito pela equipe técnica',
-  /** Rótulo da faixa com os 6 dados. */
-  itemsTitle: 'O que agiliza o seu orçamento',
+  /** Rótulo do botão da seção. */
+  cta: 'Solicite sua cotação',
   items: [
     { icon: 'gauge', label: 'Pressão', hint: 'de trabalho, em bar' },
     { icon: 'move', label: 'Vazão', hint: 'consumo de ar' },
@@ -40,6 +42,7 @@ export const supportPanel = {
   highlight: string
   text: string
   microcopy: string
-  itemsTitle: string
+  cta: string
+  itemsLabel: string
   items: readonly [SupportItem, SupportItem, SupportItem, SupportItem, SupportItem, SupportItem]
 }

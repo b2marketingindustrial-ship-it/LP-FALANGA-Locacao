@@ -1,23 +1,28 @@
 ---
 /**
- * Painel de apoio à identificação — fase "apoio" da biblioteca B2.
+ * Painel de apoio ao orçamento — fase "apoio" da biblioteca B2.
  *
- * Falanga: bloco navy da fase de apoio, no painel do "Como funciona" das outras LPs Falanga
- * (27/10/2026): painel arredondado de 28px com brilho azul, eyebrow com traço amarelo e o
- * fim do título em amarelo. Título e texto à esquerda, botão amarelo à direita e, na base, a
- * faixa com os 6 dados do orçamento.
- * `npm run compose` sobrescreve este arquivo com o da biblioteca: restaure esta versão
- * depois de recompor.
+ * Painel navy dentro de uma seção clara: é uma das duas seções que carregam bloco navy
+ * (`carriesNavy`), o respiro escuro da primeira metade da página.
+ *
+ * VARIANTE LOCAL, a mesma da LP de peças (27/10/2026), que segue o painel "Como funciona" da
+ * LP de compressores de parafuso: painel na largura do conteúdo da página, título à esquerda
+ * com o fim em amarelo, card de vidro à direita com o selo da equipe e o CTA, e os 6 dados em
+ * cards contornados com ícone amarelo ao lado do título. O contrato da seção é o mesmo da
+ * biblioteca — 6 dados, CTA `identificar-cta`, painel navy, `tone`/`rhythm`.
+ *
+ * ATENÇÃO: `npm run compose` recopia o componente da biblioteca e desfaz esta variante.
+ * Recompor a página exige reaplicá-la a partir do git.
  */
 import Section from '@components/Section.astro'
 import Icon from '@components/Icon.astro'
 import type { SectionProps } from '@lib/layout'
-import { cta } from '@data/content'
 import { supportPanel } from '@data/sections/identificar'
 
 type Props = SectionProps
 
 const { tone, rhythm } = Astro.props
+const items = supportPanel.items
 
 // O trecho em amarelo é o fim do título; o texto inteiro continua em `supportPanel.title`.
 const cut = supportPanel.title.lastIndexOf(supportPanel.highlight)
@@ -25,64 +30,81 @@ const lead = cut >= 0 ? supportPanel.title.slice(0, cut).trimEnd() : supportPane
 const highlight = cut >= 0 ? supportPanel.highlight : ''
 ---
 
-<Section id="identificar" tone={tone} rhythm={rhythm}>
-  <div class="support-panel relative isolate overflow-hidden rounded-[28px] p-6 shadow-[0_24px_60px_-34px_rgba(0,24,48,0.8)] sm:p-8 lg:p-10">
-    <div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
-      <div class="min-w-0 max-w-2xl">
-        <p class="flex items-center gap-4 font-sans text-[13px] font-semibold tracking-[0.2em] text-[#8bcdff] uppercase">
-          <span
-            aria-hidden="true"
-            class="h-[4px] w-10 shrink-0 rounded-full bg-brand-yellow"
-          ></span>
-          {supportPanel.eyebrow}
+<Section id="identificar" tone={tone} rhythm={rhythm} container={false}>
+  {/* Painel na largura do conteúdo da página (page-container), como as outras seções. */}
+  <div class="page-container">
+    <div class="support-panel relative overflow-hidden rounded-[28px] p-6 shadow-[0_24px_60px_-34px_rgba(0,24,48,0.8)] sm:p-8 lg:p-10">
+      <div class="relative">
+        {/* Cabeçalho: título à esquerda; à direita, um card de vidro com o selo da equipe e o
+            CTA em pilha, centrado na altura do título */}
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+          <div class="min-w-0">
+            <p class="flex items-center gap-4 font-sans text-[13px] font-semibold tracking-[0.2em] text-[#8bcdff] uppercase">
+              <span
+                aria-hidden="true"
+                class="h-[4px] w-10 shrink-0 rounded-full bg-brand-yellow"
+              ></span>
+              {supportPanel.eyebrow}
+            </p>
+            <h2 class="mt-3 font-display title-section leading-[1.08] font-extrabold tracking-[-0.03em] text-neutral-light">
+              {/* `block` em toda largura, e não `sm:block`: o trecho amarelo daqui é curto
+                  ("a peça certa?") e, inline no mobile, deixava o "a" pendurado no fim da linha. */}
+              {lead} {highlight && <span class="block text-brand-yellow">{highlight}</span>}
+            </h2>
+            <p class="mt-4 max-w-[38rem] font-sans text-lead text-neutral-light/80">
+              {supportPanel.text}
+            </p>
+          </div>
+
+          <div class="support-action flex shrink-0 flex-col items-stretch gap-4 rounded-2xl p-5">
+            <p class="flex items-center gap-3">
+              <span class="flex size-11 shrink-0 items-center justify-center rounded-full bg-brand-yellow/15 text-brand-yellow">
+                <Icon name="shield" class="size-6" />
+              </span>
+              <span class="font-display text-[16px] leading-tight font-bold text-neutral-light">
+                {supportPanel.microcopy}
+              </span>
+            </p>
+            <button
+              type="button"
+              data-cta="identificar-cta"
+              class="btn-slave-whats cta cta-yellow justify-center"
+            >
+              {supportPanel.cta}
+              <Icon name="arrow-right" class="shrink-0" />
+            </button>
+          </div>
+        </div>
+
+        {/* Os 6 dados, em cards contornados: ícone amarelo ao lado do título, dica embaixo */}
+        <p class="mt-10 font-sans text-[13px] font-semibold tracking-[0.14em] text-neutral-light/60 uppercase">
+          {supportPanel.itemsLabel}
         </p>
-
-        <h2 class="mt-3 font-display title-section leading-[1.08] font-extrabold tracking-[-0.03em] text-neutral-light">
-          {lead} {highlight && <span class="text-brand-yellow sm:block">{highlight}</span>}
-        </h2>
-
-        <p class="mt-4 font-sans text-lead text-neutral-light/75">{supportPanel.text}</p>
-      </div>
-
-      <div class="flex flex-col items-stretch gap-3 lg:shrink-0 lg:items-end">
-        <button type="button" data-cta="identificar-cta" class="btn-slave-whats cta cta-yellow">
-          {cta.primary}
-          <Icon name="arrow-right" class="shrink-0" />
-        </button>
-        <span class="flex items-center justify-center gap-2 font-sans text-[14px] text-neutral-light/75 lg:justify-end">
-          <Icon name="shield" class="size-5 shrink-0 text-brand-yellow" />
-          {supportPanel.microcopy}
-        </span>
+        <ul
+          class="mt-4 grid gap-x-4 gap-y-4 sm:grid-cols-2 lg:grid-cols-6"
+          aria-label="Dados que ajudam no orçamento da locação"
+        >
+          {items.map((item) => (
+            <li class="support-card flex h-full flex-col rounded-2xl border border-[#1f5fa8]/80 bg-white/[0.03] px-5 py-5">
+              <div class="flex items-center gap-3">
+                <Icon name={item.icon} class="size-6 shrink-0 text-brand-yellow" />
+                <p class="font-display text-[16px] leading-snug font-extrabold text-neutral-light xl:text-[17px]">
+                  {item.label}
+                </p>
+              </div>
+              <p class="mt-2.5 font-sans text-[14px] leading-relaxed text-neutral-light/75">
+                {item.hint}
+              </p>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
-
-    <p class="mt-10 font-sans text-[12px] font-semibold tracking-[0.18em] text-neutral-light/55 uppercase lg:mt-12">
-      {supportPanel.itemsTitle}
-    </p>
-    <ul class="support-strip mt-4 grid grid-cols-2 rounded-xl border border-white/10 bg-white/[0.05] backdrop-blur-sm sm:grid-cols-3 xl:flex">
-      {supportPanel.items.map((item) => (
-        <li class="support-item flex flex-col items-start gap-2.5 px-4 py-4 sm:flex-row sm:items-center sm:gap-3.5 sm:px-5 sm:py-5 lg:gap-2.5 lg:px-3 lg:py-6 xl:flex-1 xl:justify-center xl:gap-3 xl:px-4">
-          <Icon
-            name={item.icon}
-            class="size-7 shrink-0 text-brand-yellow sm:size-9 lg:size-8 xl:size-9"
-          />
-          <span class="flex min-w-0 flex-col gap-1">
-            <span class="font-display text-[15px] leading-tight font-bold text-neutral-light sm:text-base xl:text-[17px] xl:whitespace-nowrap">
-              {item.label}
-            </span>
-            <span class="font-sans text-[12px] leading-snug text-neutral-light/60 sm:text-[13px] xl:whitespace-nowrap">
-              {item.hint}
-            </span>
-          </span>
-        </li>
-      ))}
-    </ul>
   </div>
 </Section>
 
 <style>
-  /* Fundo do painel, o mesmo do "Como funciona" das outras LPs: navy com um brilho azul no
-     canto superior direito e na base. */
+  /* Fundo do mockup: navy com um brilho azul no canto superior direito e na base. */
   .support-panel {
     background:
       radial-gradient(1000px 520px at 100% -10%, rgb(0 78 150 / 0.55) 0%, transparent 62%),
@@ -90,42 +112,30 @@ const highlight = cut >= 0 ? supportPanel.highlight : ''
       linear-gradient(160deg, #003770 0%, #012b59 45%, #002a5c 100%);
   }
 
-  /* Divisórias internas, que não encostam no topo nem na base da faixa */
-  .support-item {
-    position: relative;
+  /* Barra do selo e do CTA: vidro discreto sobre o navy do painel. */
+  .support-action {
+    background-image: linear-gradient(
+      160deg,
+      rgb(255 255 255 / 0.1) 0%,
+      rgb(255 255 255 / 0.03) 100%
+    );
+    border: 1px solid rgb(255 255 255 / 0.12);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
   }
 
-  .support-item::after {
-    content: '';
-    position: absolute;
-    top: 18%;
-    right: 0;
-    bottom: 18%;
-    width: 1px;
-    background: rgb(255 255 255 / 0.12);
+  .support-card {
+    transition: background-color 260ms ease;
   }
 
-  .support-item:nth-child(2n)::after {
-    display: none;
+  .support-card:hover {
+    background-color: rgb(255 255 255 / 0.06);
   }
 
-  @media (width >= 40rem) {
-    .support-item:nth-child(2n)::after {
-      display: block;
-    }
-
-    .support-item:nth-child(3n)::after {
-      display: none;
-    }
-  }
-
-  @media (width >= 80rem) {
-    .support-item:nth-child(3n)::after {
-      display: block;
-    }
-
-    .support-item:last-child::after {
-      display: none;
+  @media (prefers-reduced-motion: reduce) {
+    .support-card {
+      transition: none;
     }
   }
 </style>

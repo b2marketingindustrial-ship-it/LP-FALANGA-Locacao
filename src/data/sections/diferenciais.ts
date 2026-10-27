@@ -26,7 +26,7 @@ export const why = {
   /** Cada item é uma linha do H2 (quebra forçada): as duas primeiras em branco, a última em amarelo. */
   titleLines: ['Há 40 anos levando', 'ar comprimido à', 'indústria do Nordeste.'],
   /** Cada `\n` é uma quebra forçada a partir de 1280px; abaixo disso o texto corre normal. */
-  text: 'A Falanga acompanha a sua indústria da contratação à\ndevolução do compressor, com confiabilidade em cada etapa.',
+  text: 'A Falanga acompanha a sua indústria em cada etapa,\ncom confiabilidade e qualidade no atendimento.',
   cta: 'Solicitar cotação',
   scene: {
     src: cenario,
