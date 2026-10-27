@@ -1,133 +1,43 @@
 ---
 /**
- * ESTRUTURA FIXA (PROMPT-PADRAO-LP 4.1.5), na versão Falanga.
+ * ESTRUTURA FIXA (PROMPT-PADRAO-LP 4.1.5). Uma linha: copyright · endereço · crédito da B2.
+ * Sem menu, redes, telefone, e-mail, logo ou formulário.
  *
- * Mesmo desvio do padrão aprovado na LP Spinplus (docs/BRIEFING.md, "Desvios"):
- * rodapé em dois níveis — marcas, frase de posicionamento e endereço em cima;
- * copyright e crédito da B2 embaixo. Continua sem menu, redes, telefone, e-mail ou
- * formulário: contato é papel do plugin de atendimento.
+ * Correção de 22/10/2026 (defeito 5 em docs/BRIEFING.md): o endereço tinha
+ * `lg:whitespace-nowrap` e os dois textos, `shrink-0`. A partir de `lg` nada podia
+ * encolher nem quebrar e, com um endereço de duas unidades (Fortaleza e Recife), a
+ * linha pedia 1112px num viewport de 1024 — rolagem horizontal na página inteira.
+ * Agora o endereço quebra quando falta espaço (`min-w-0` para poder encolher no flex)
+ * e volta a uma linha só quando cabe, em `xl`. O layout em 1440px e acima não muda.
  */
-import { Image } from 'astro:assets'
 import Icon from './Icon.astro'
 import { site } from '../data/site'
-import { footer, header } from '../data/content'
-import logo from '../assets/LOGO.png'
+import { footer } from '../data/content'
 
 const year = new Date().getFullYear()
 ---
 
-<footer class="site-footer relative overflow-hidden text-neutral-light" data-footer="falanga">
-  <span aria-hidden="true" class="site-footer__grid pointer-events-none absolute inset-0"></span>
-  <span
-    aria-hidden="true"
-    class="pointer-events-none absolute -top-40 -right-24 size-[30rem] rounded-full bg-brand-yellow/10 blur-3xl"
-  ></span>
+<footer class="navy-premium border-t border-white/15">
+  <div class="page-container flex flex-col items-center gap-3 py-6 text-center lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:text-left">
+    <p class="shrink-0 font-sans text-xs text-neutral-light/55">
+      © {year} {site.brand}. Todos os direitos reservados.
+    </p>
 
-  <div class="relative page-container">
-    <div class="grid gap-10 py-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-center lg:gap-16 lg:py-14">
-      {/* Marcas e posicionamento */}
-      <div>
-        <div class="inline-flex items-center gap-5 rounded-2xl bg-neutral-light px-5 py-3.5 shadow-[0_18px_40px_-20px_rgba(0,0,0,0.6)] sm:gap-6 sm:px-6">
-          <Image
-            src={logo}
-            alt={site.brand}
-            width={341}
-            height={82}
-            format="webp"
-            loading="lazy"
-            decoding="async"
-            class="h-9 w-auto sm:h-11"
-          />
-          <span aria-hidden="true" class="h-9 w-px bg-neutral-gray-200/60"></span>
-          <Image
-            src={header.partner.src}
-            alt={header.partner.alt}
-            width={317}
-            height={80}
-            format="webp"
-            loading="lazy"
-            decoding="async"
-            class="h-6 w-auto sm:h-7"
-          />
-        </div>
-        <p class="mt-5 max-w-md font-sans text-[15px] leading-relaxed text-neutral-light/70">
-          {footer.tagline}
-        </p>
-      </div>
+    <address class="flex min-w-0 items-center gap-2 font-sans text-xs text-neutral-light/70 not-italic xl:whitespace-nowrap">
+      <Icon name="map-pin" class="size-3.5 shrink-0 text-brand-yellow" />
+      <span>{site.address}</span>
+    </address>
 
-      {/* Endereço e privacidade */}
-      <div class="flex flex-col gap-4 lg:items-end">
-        <div class="flex w-full items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm lg:max-w-md">
-          <span class="flex size-11 shrink-0 items-center justify-center rounded-full bg-brand-yellow/15 text-brand-yellow">
-            <Icon name="map-pin" class="size-5" />
-          </span>
-          <span class="flex min-w-0 flex-col gap-1">
-            <span class="font-sans text-[11px] font-semibold tracking-[0.18em] text-neutral-light/50 uppercase">
-              Endereço
-            </span>
-            <address class="font-sans text-[15px] leading-relaxed text-neutral-light/85 not-italic">
-              {site.address}
-            </address>
-          </span>
-        </div>
-        {site.privacyUrl && (
-          <a
-            href={site.privacyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="site-footer__link inline-flex items-center gap-2 font-sans text-[13px] text-neutral-light/65 hover:text-neutral-light"
-          >
-            <Icon name="shield" class="size-4 text-brand-yellow" />
-            Política de privacidade
-          </a>
-        )}
-      </div>
-    </div>
-
-    {/* Copyright e crédito */}
-    <div class="flex flex-col items-center gap-2 border-t border-white/10 py-5 text-center font-sans text-xs text-neutral-light/50 sm:flex-row sm:justify-between sm:text-left">
-      <p>
-        © {year} {site.brand}. Todos os direitos reservados.
-      </p>
-      <p>
-        Desenvolvido por{' '}
-        <a
-          href={footer.credit.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="site-footer__link font-semibold text-neutral-light/80 hover:text-neutral-light"
-        >
-          {footer.credit.label}
-        </a>
-      </p>
-    </div>
+    <p class="shrink-0 font-sans text-xs text-neutral-light/55">
+      Desenvolvido por{' '}
+      <a
+        href={footer.credit.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="font-semibold text-neutral-light/80 transition-colors hover:text-brand-yellow"
+      >
+        {footer.credit.label}
+      </a>
+    </p>
   </div>
 </footer>
-
-<style>
-  .site-footer {
-    background:
-      radial-gradient(900px 420px at 10% 0%, rgb(255 255 255 / 0.07) 0%, transparent 60%),
-      linear-gradient(165deg, #0d2a5c 0%, #071a3a 45%, #04122a 100%);
-  }
-
-  /* Malha técnica, mais visível à esquerda */
-  .site-footer__grid {
-    background-image:
-      linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
-    background-size: 40px 40px;
-    mask-image: radial-gradient(ellipse 70% 90% at 15% 30%, black 0%, transparent 75%);
-    -webkit-mask-image: radial-gradient(ellipse 70% 90% at 15% 30%, black 0%, transparent 75%);
-  }
-
-  .site-footer__link {
-    transition: color 200ms ease;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .site-footer__link {
-      transition: none;
-    }
-  }
-</style>

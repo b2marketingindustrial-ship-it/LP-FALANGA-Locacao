@@ -19,8 +19,8 @@ export const site = {
    * Provisória: endereço da LP antiga, até a Falanga confirmar onde a nova vai ao ar.
    */
   url: 'https://falangapneumatica.com.br/locacao-de-compressores-2025/',
-  /** Endereço completo com CEP (entrada 9). Footer e JSON-LD. A LP antiga só informa a cidade. */
-  address: 'Fortaleza - CE',
+  /** Endereço completo com CEP (entrada 9). Footer e JSON-LD: as duas unidades, como nas outras LPs Falanga. */
+  address: 'R. Mirian Rocha, 97 - Fortaleza - CE · Rua Tomaz Gonzaga, 74 - Zumbi, Recife - PE',
   /** Link da política de privacidade do cliente (entrada 10). Vazio esconde o link, mas a nota de LGPD continua. */
   privacyUrl: '',
   /** Versão do padrão B2 que esta LP segue. Não editar manualmente; vem do template. */

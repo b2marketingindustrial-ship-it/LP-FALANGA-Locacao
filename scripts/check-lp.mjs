@@ -201,7 +201,12 @@ for (const f of astroFiles) {
       'order-2 w-full lg:order-1',
       'data-cta="cotacao-whatsapp"',
     ],
-    'Footer.astro': ['data-footer="falanga"', 'getFullYear()', '<address', 'noopener noreferrer'],
+    'Footer.astro': [
+      'navy-premium border-t border-white/15',
+      'getFullYear()',
+      '<address',
+      'noopener noreferrer',
+    ],
   }
   for (const [name, needles] of Object.entries(expect)) {
     const f = join(SRC, 'components', name)

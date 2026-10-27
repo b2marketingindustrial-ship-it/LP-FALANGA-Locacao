@@ -13,7 +13,6 @@ import type { Photo } from './types'
 import { site } from './site'
 
 import heroBg from '@assets/heroBg.webp'
-import schulz from '@assets/schulz.png'
 
 /* ------------------------------------------------------------------ tipos */
 
@@ -42,21 +41,16 @@ export const cta = {
 /* ------------------------------------------------------------------ header */
 
 /**
- * Header no padrão das LPs Falanga: logo, tagline com selo e CTA. `partner` (logo Schulz)
- * já não aparece aqui: só o rodapé ainda a usa, até o ponto do rodapé ser revisado.
+ * Header no padrão das LPs Falanga: logo, tagline com selo e CTA. Sem logo Schulz: a autorização
+ * de uso da marca não foi solicitada (como nas LPs de peças e manutenção).
  */
 export const header = {
   tagline: site.product,
   /** Rótulo do CTA do header no desktop (mesmo das outras LPs Falanga). */
   cta: 'Fale com um especialista',
-  partner: {
-    src: schulz,
-    alt: 'Schulz Compressores',
-  },
 } as const satisfies {
   tagline: string
   cta: string
-  partner: Photo
 }
 
 /* -------------------------------------------------------------------- hero */
@@ -66,8 +60,8 @@ export const hero = {
   title: 'Locação de Compressores',
   /** Manchete em duas linhas: `headline` em branco e `highlight[0]` em amarelo na primeira; o resto de `highlight` na segunda. */
   headline: ['Sua produção'],
-  highlight: ['não para.', 'Compressores prontos para alugar.'],
-  text: 'Frota de compressores de parafuso Schulz para locação, com manutenção inclusa e atendimento em todo o Nordeste desde 1981.',
+  highlight: ['não para.', 'Compressores para alugar.'],
+  text: 'Compressores de parafuso Schulz para locação, com manutenção inclusa e atendimento em todo o Nordeste.',
   banner: {
     src: heroBg,
     alt: 'Compressores de parafuso Schulz SRP 4030, SRP 4030 Total Solution e SRP 5100 da frota de locação',
@@ -108,8 +102,5 @@ export const quote = {
 /* ------------------------------------------------------------------ footer */
 
 export const footer = {
-  /** Frase sob as marcas, no rodapé. */
-  tagline:
-    'Locação de compressores de ar Schulz para indústrias do Nordeste, com mais de 40 anos de tradição em soluções de ar comprimido.',
   credit: { label: 'B2 Marketing Industrial', url: 'https://b2marketingindustrial.com.br' },
 } as const
