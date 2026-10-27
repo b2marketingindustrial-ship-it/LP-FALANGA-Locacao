@@ -39,7 +39,7 @@ const isDev = import.meta.env.DEV
       loading="eager"
       fetchpriority="high"
       decoding="async"
-      class="h-full w-full object-cover object-[60%_center]"
+      class="h-full w-full object-cover object-[48%_center]"
       pictureAttributes={{ class: 'block h-full w-full' }}
     />
   </div>
@@ -241,28 +241,22 @@ const isDev = import.meta.env.DEV
     /* aos poucos nos quatro lados, sem linha visível. Máscara, e não véu, para não haver cor */
     /* a casar. Paradas próximas imitam uma curva suave (ease-out) em vez de uma rampa linear. */
     .hero-fade {
-      -webkit-mask-image: radial-gradient(
-        ellipse 50% 78% at 52% 56%,
-        #000 0%,
-        #000 38%,
-        rgb(0 0 0 / 0.9) 48%,
-        rgb(0 0 0 / 0.72) 58%,
-        rgb(0 0 0 / 0.5) 68%,
-        rgb(0 0 0 / 0.28) 78%,
-        rgb(0 0 0 / 0.12) 88%,
-        rgb(0 0 0 / 0.03) 95%,
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0,
+        rgb(0 0 0 / 0.5) 12%,
+        #000 26%,
+        #000 74%,
+        rgb(0 0 0 / 0.5) 88%,
         transparent 100%
       );
-      mask-image: radial-gradient(
-        ellipse 50% 78% at 52% 56%,
-        #000 0%,
-        #000 38%,
-        rgb(0 0 0 / 0.9) 48%,
-        rgb(0 0 0 / 0.72) 58%,
-        rgb(0 0 0 / 0.5) 68%,
-        rgb(0 0 0 / 0.28) 78%,
-        rgb(0 0 0 / 0.12) 88%,
-        rgb(0 0 0 / 0.03) 95%,
+      mask-image: linear-gradient(
+        to right,
+        transparent 0,
+        rgb(0 0 0 / 0.5) 12%,
+        #000 26%,
+        #000 74%,
+        rgb(0 0 0 / 0.5) 88%,
         transparent 100%
       );
     }
