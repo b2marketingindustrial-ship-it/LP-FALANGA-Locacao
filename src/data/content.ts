@@ -63,7 +63,7 @@ export const hero = {
    */
   title: 'Locação de compressores',
   tail: ['Schulz para a indústria.'],
-  text: 'Frota de compressores de parafuso Schulz para locação, com manutenção inclusa e equipe técnica especializada.',
+  text: 'Compressores de parafuso para locação, no tempo e na capacidade que a sua operação precisar.',
   /** Linha de área atendida abaixo do CTA, separada por ponto. */
   area: ['Unidades em Fortaleza e Recife', 'Atendimento em todo o Nordeste'],
   banner: {
@@ -73,7 +73,7 @@ export const hero = {
   points: [
     { icon: 'wrench', line1: 'Manutenção', line2: 'inclusa' },
     { icon: 'cpu', line1: 'Frota', line2: 'Schulz' },
-    { icon: 'trophy', line1: 'Desde', line2: '1981' },
+    { icon: 'truck', line1: 'Entrega', line2: 'ágil' },
     { icon: 'tag', line1: 'Sem custo', line2: 'de compra' },
   ],
 } as const satisfies {
@@ -94,8 +94,8 @@ export const quote = {
   text: 'Descubra como a locação de compressores da Falanga pode fazer a diferença no seu negócio. Preencha o formulário ou fale direto conosco pelo WhatsApp.',
   trust: [
     { icon: 'clock', label: 'Resposta rápida' },
-    { icon: 'gauge', label: 'Compressor dimensionado' },
-    { icon: 'users', label: 'Equipe especializada' },
+    { icon: 'chat', label: 'Formulário ou WhatsApp' },
+    { icon: 'shield', label: 'Dados usados só no orçamento' },
   ],
 } as const satisfies {
   eyebrow: string

@@ -22,8 +22,8 @@ export const supportPanel = {
   title: 'Conheça nossas soluções sob medida para a sua indústria',
   /** Trecho final do título, em amarelo (precisa existir dentro de `title`). */
   highlight: 'sob medida para a sua indústria',
-  text: 'Não precisa ter todos os dados em mãos. Envie o que souber da sua operação e nossa equipe de especialistas indica o compressor certo para locação.',
-  microcopy: 'Retorno da nossa equipe de especialistas',
+  text: 'Não precisa ter todos os dados em mãos. Envie o que souber da sua operação e nossa a equipe indica o compressor certo para locação.',
+  microcopy: 'Dimensionamento feito pela equipe técnica',
   /** Rótulo da faixa com os 6 dados. */
   itemsTitle: 'O que agiliza o seu orçamento',
   items: [
