@@ -86,7 +86,7 @@ export const hero = {
 export const quote = {
   eyebrow: 'Solicite sua cotação',
   title: 'Fale com os nossos engenheiros agora mesmo!',
-  text: 'Descubra como a locação de compressores da Falanga pode fazer a diferença no seu negócio. Preencha o formulário ou fale direto conosco pelo WhatsApp.',
+  text: 'Descubra como a locação de compressores da Falanga reduz os custos de manutenção e de energia da sua operação. Preencha o formulário ou fale direto conosco pelo WhatsApp.',
 } as const satisfies {
   eyebrow: string
   title: string

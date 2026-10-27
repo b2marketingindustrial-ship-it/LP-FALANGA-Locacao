@@ -38,7 +38,8 @@ export const rental = {
     {
       icon: 'clipboard-check',
       title: 'Planejamento estratégico',
-      description: 'Demanda sazonal, obra ou expansão: ajuste a capacidade ao período.',
+      description:
+        'Demanda sazonal, obra ou expansão: ajuste a capacidade ao período, pague só pelo uso e preserve o fluxo de caixa.',
     },
   ],
 } as const satisfies {
