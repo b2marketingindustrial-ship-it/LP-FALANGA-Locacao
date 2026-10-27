@@ -33,21 +33,20 @@ export const cta = {
 /* ------------------------------------------------------------------ header */
 
 /**
- * Header claro: logo Falanga (com o selo de 40 anos), produto, selo regional e a marca
- * Schulz à direita — a mesma tecnologia que a LP antiga anuncia.
+ * Header no padrão das LPs Falanga: logo, tagline com selo e CTA. `partner` (logo Schulz)
+ * já não aparece aqui: só o rodapé ainda a usa, até o ponto do rodapé ser revisado.
  */
 export const header = {
   tagline: site.product,
-  badge: 'Sua parceira no Nordeste',
-  badgeSub: 'Assistência técnica especializada',
+  /** Rótulo do CTA do header no desktop (mesmo das outras LPs Falanga). */
+  cta: 'Fale com um especialista',
   partner: {
     src: schulz,
     alt: 'Schulz Compressores',
   },
 } as const satisfies {
   tagline: string
-  badge: string
-  badgeSub: string
+  cta: string
   partner: Photo
 }
 

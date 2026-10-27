@@ -1,68 +1,89 @@
 ---
 /**
- * ESTRUTURA FIXA (PROMPT-PADRAO-LP 4.1.1), na versão Falanga.
+ * ESTRUTURA FIXA (PROMPT-PADRAO-LP 4.1.1), na versão Falanga: barra branca com a logo
+ * alinhada dentro dela e CTA em pílula amarela com texto navy. Sem menu: uma rota, uma
+ * página (regra 1). Registrado em docs/BRIEFING.md (Desvios do padrão).
  *
- * Mesmo desvio do padrão aprovado na LP Spinplus (docs/BRIEFING.md, "Desvios"): header
- * claro com filete — aqui amarelo —, logo sem placa pendurada, produto ao centro, selo
- * regional e a marca Schulz à direita. Sem botão de cotação: o CTA do hero está logo
- * abaixo. Muda só o conteúdo, que vem de `site` e `header` (content.ts).
+ * Acabamento da LP de compressores de parafuso (22–23/10/2026), levado para esta LP: filete
+ * amarelo-azul no topo, largura do conteúdo da página (`page-container`), logo 20% menor,
+ * tagline com selo, CTA do sistema `cta` e sombra só depois que a página rola
+ * (`data-scrolled`). Sem a logo da Schulz: a autorização de marca não foi solicitada (24/10/2026).
+ * Alinhado ao padrão das outras LPs Falanga em 27/10/2026, no lugar do header claro do mockup
+ * da Spinplus (sem CTA, selo regional e logo Schulz).
+ * Muda só: logo (src/assets/LOGO.png), tagline (site.product) e rótulos (content.header, content.cta).
  */
 import { Image } from 'astro:assets'
+import Icon from './Icon.astro'
 import logo from '../assets/LOGO.png'
 import { site } from '../data/site'
-import { header } from '../data/content'
+import { header, cta } from '../data/content'
 ---
 
-<header
-  class="sticky top-0 z-50 border-b-[3px] border-brand-yellow bg-neutral-light shadow-[0_8px_20px_-14px_rgba(0,24,48,0.4)]"
-  data-header="falanga"
->
-  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:gap-8 lg:px-10">
-    {/* 1. Logo */}
-    <a href="/" class="flex shrink-0 items-center">
-      <Image
-        src={logo}
-        alt={site.brand}
-        width={341}
-        height={82}
-        format="webp"
-        loading="eager"
-        fetchpriority="low"
-        decoding="async"
-        class="h-10 w-auto sm:h-12 lg:h-[52px]"
-      />
-    </a>
+<header data-header class="site-header sticky top-0 z-50 bg-neutral-light/95 backdrop-blur-md">
+  <span
+    aria-hidden="true"
+    class="block h-[3px] bg-[linear-gradient(90deg,var(--color-brand-yellow)_0%,var(--color-brand-yellow)_40%,var(--color-brand-blue)_100%)]"
+  ></span>
+  <div class="page-container flex items-center justify-between gap-3 py-3 sm:gap-6">
+    {/* 1. Logo da Falanga, 20% menor que a do padrão */}
+    <div class="flex shrink-0 items-center gap-5 lg:gap-6">
+      <a href="/" class="flex shrink-0 items-center">
+        <Image
+          src={logo}
+          alt={site.brand}
+          width={341}
+          height={82}
+          format="webp"
+          loading="eager"
+          fetchpriority="low"
+          decoding="async"
+          class="header-logo h-8 w-auto sm:h-[45px]"
+        />
+      </a>
+    </div>
 
-    <span aria-hidden="true" class="hidden h-12 w-px bg-neutral-gray-200/50 md:block"></span>
-
-    {/* 2. Produto (some no mobile) */}
-    <span class="hidden flex-1 font-display text-lg font-extrabold tracking-[0.01em] text-primary-dark-900 uppercase md:block lg:text-[22px]">
-      {header.tagline}
-    </span>
-
-    <span aria-hidden="true" class="hidden h-12 w-px bg-neutral-gray-200/50 xl:block"></span>
-
-    {/* 3. Selo regional (desktop largo) */}
-    <p class="hidden shrink-0 flex-col items-center gap-1 text-center xl:flex">
-      <span class="bg-brand-yellow px-2.5 py-0.5 font-sans text-[13px] font-extrabold tracking-[0.02em] text-primary-dark-900 uppercase">
-        {header.badge}
+    {/* 2. Tagline com selo, centrada entre as logos e o CTA (some no mobile) — no lugar do menu do mockup */}
+    <div class="hidden flex-1 items-center justify-center gap-6 lg:flex">
+      <span class="flex items-center gap-2.5 font-display text-[13px] font-extrabold tracking-[0.14em] text-primary-dark uppercase">
+        <span class="flex size-7 items-center justify-center rounded-full bg-brand-yellow-soft text-[#00256f]">
+          <Icon name="badge-check" class="size-4" />
+        </span>
+        {header.tagline}
       </span>
-      <span class="font-sans text-[12px] font-bold tracking-[0.04em] text-ink-soft uppercase">
-        {header.badgeSub}
-      </span>
-    </p>
+    </div>
 
-    {/* 4. Marca parceira */}
-    <Image
-      src={header.partner.src}
-      alt={header.partner.alt}
-      width={317}
-      height={80}
-      format="webp"
-      loading="eager"
-      fetchpriority="low"
-      decoding="async"
-      class="h-7 w-auto shrink-0 sm:h-8 lg:h-9"
-    />
+    {/* 3. CTA em pílula amarela, rótulo curto no mobile */}
+    <button type="button" data-cta="header-cta" class="btn-slave-whats cta cta-yellow cta-sm">
+      <span class="sm:hidden">{cta.primaryShort}</span>
+      <span class="hidden sm:inline">{header.cta}</span>
+      <Icon name="arrow-right" class="shrink-0" />
+    </button>
   </div>
 </header>
+
+<style>
+  /* Linha fina enquanto a página está no topo; sombra quando o conteúdo passa por baixo. */
+  .site-header {
+    box-shadow: 0 1px 0 rgb(0 33 71 / 0.08);
+    transition: box-shadow 0.25s ease;
+  }
+
+  .site-header[data-scrolled] {
+    box-shadow: 0 14px 30px -20px rgb(0 33 71 / 0.55);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // Sombra do header só depois que a página rola.
+  document.querySelectorAll<HTMLElement>('[data-header]').forEach((el) => {
+    const update = () => el.toggleAttribute('data-scrolled', window.scrollY > 8)
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+  })
+</script>

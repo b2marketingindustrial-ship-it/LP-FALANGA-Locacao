@@ -180,7 +180,12 @@ for (const f of astroFiles) {
     // (docs/BRIEFING.md, "Desvios do padrão"), com as cores e o conteúdo da Falanga. As
     // assinaturas são as dessa versão; o botão de WhatsApp do hero e da cotação é um espaço
     // vazio que o plugin preenche.
-    'Header.astro': ['sticky top-0 z-50', 'data-header="falanga"', 'border-brand-yellow'],
+    'Header.astro': [
+      'sticky top-0 z-50',
+      'bg-neutral-light',
+      'header-logo',
+      'data-cta="header-cta"',
+    ],
     'Hero.astro': [
       'data-hero',
       'data-cta="hero-whatsapp"',
