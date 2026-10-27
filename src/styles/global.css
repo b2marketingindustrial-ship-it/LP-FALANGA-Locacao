@@ -19,10 +19,9 @@
    Só altere os valores se a entrevista (entrada 21) trouxer cores/fonte do cliente.
    --------------------------------------------------------------------------- */
 @theme {
-  /* Falanga: navy puxado para o azul da logo. */
-  --color-primary-dark: #0b2453;
-  --color-primary-dark-800: #14387a;
-  --color-primary-dark-900: #001641;
+  --color-primary-dark: #002147;
+  --color-primary-dark-800: #003669;
+  --color-primary-dark-900: #001830;
   --color-accent-orange: #ff6b00;
   --color-accent-orange-dark: #e55f00;
   --color-neutral-light: #ffffff;
@@ -31,16 +30,14 @@
   --color-ink: #1b2733;
   --color-ink-soft: #44546a;
 
-  /* Falanga: azul e amarelo do mockup do hero (22/10/2026), mais vivos que os da logo. O azul
-     é texto e detalhe sobre fundo claro; o amarelo é superfície de destaque (faixa do hero,
-     botões, ícones) e marcador sobre o navy. */
-  --color-brand: #0043ad;
-  --color-brand-dark: #00338a;
-  --color-brand-yellow: #ffe300;
-  --color-brand-yellow-dark: #f0d200;
-  /* Azul royal dos botões `cta-blue` e fundo dos quadrados de ícone (tokens das outras LPs Falanga). */
+  /* Falanga: mesmos tokens das LPs de parafuso, peças e manutenção (padronizado em 27/10/2026).
+     Amarelo da logo: superfície de destaque e marcador sobre o navy, sempre com texto navy por
+     cima, nunca branco. Azul royal: títulos, links, botões `cta-blue` e cards escuros. */
+  --color-brand-yellow: #fde001;
+  --color-brand-yellow-dark: #f0cf00;
   --color-brand-blue: #0043a1;
   --color-brand-blue-dark: #00377f;
+  /* Fundo dos quadrados de ícone e das faixas claras de destaque. */
   --color-brand-yellow-soft: #feedab;
   --color-brand-mist: #ecf1f9;
 
@@ -66,11 +63,11 @@
   }
 
   ::selection {
-    @apply bg-brand text-neutral-light;
+    @apply bg-accent-orange text-neutral-light;
   }
 
   *:focus-visible {
-    outline: 2px solid var(--color-brand);
+    outline: 2px solid var(--color-accent-orange);
     outline-offset: 2px;
   }
 }

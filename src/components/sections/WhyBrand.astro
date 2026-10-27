@@ -34,7 +34,7 @@ const lastIndex = why.reasons.length - 1
     <div class="grid gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-center lg:gap-14 xl:gap-20">
       {/* Título, texto e as duas marcas */}
       <div class="min-w-0">
-        <span class="inline-flex items-center gap-2.5 font-sans text-[12px] font-bold tracking-[0.16em] text-brand uppercase sm:text-[13px]">
+        <span class="inline-flex items-center gap-2.5 font-sans text-[12px] font-bold tracking-[0.16em] text-brand-blue uppercase sm:text-[13px]">
           <span aria-hidden="true" class="h-2 w-5 shrink-0 -skew-x-12 bg-brand-yellow"></span>
           {why.eyebrow}
         </span>
@@ -49,7 +49,7 @@ const lastIndex = why.reasons.length - 1
           ))}
         </h2>
 
-        <span aria-hidden="true" class="mt-6 block h-[3px] w-16 bg-brand"></span>
+        <span aria-hidden="true" class="mt-6 block h-[3px] w-16 bg-brand-blue"></span>
         <p class="mt-5 font-sans text-lead text-ink-soft">{why.text}</p>
 
         <div class="mt-8 inline-flex items-center gap-5 rounded-2xl border border-neutral-gray-200/40 bg-neutral-light px-5 py-4 shadow-[0_14px_30px_-22px_rgba(0,24,48,0.45)] sm:gap-7 sm:px-6">
@@ -73,7 +73,7 @@ const lastIndex = why.reasons.length - 1
       >
         {why.reasons.map((reason, i) =>
           i === lastIndex ? (
-            <li class="why-wide relative isolate flex flex-col gap-5 overflow-hidden rounded-2xl bg-brand p-6 text-neutral-light shadow-[0_24px_44px_-26px_rgba(20,56,122,0.8)] sm:col-span-2 sm:flex-row sm:items-center sm:p-7">
+            <li class="why-wide relative isolate flex flex-col gap-5 overflow-hidden rounded-2xl bg-brand-blue p-6 text-neutral-light shadow-[0_24px_44px_-26px_rgba(20,56,122,0.8)] sm:col-span-2 sm:flex-row sm:items-center sm:p-7">
               <span
                 aria-hidden="true"
                 class="why-wide__lines absolute -z-10 hidden sm:block"
@@ -110,7 +110,7 @@ const lastIndex = why.reasons.length - 1
               <span class="mt-5 font-display text-[17px] leading-snug font-extrabold text-primary-dark-900">
                 {reason.title}
               </span>
-              <span aria-hidden="true" class="mt-2.5 block h-[3px] w-8 bg-brand"></span>
+              <span aria-hidden="true" class="mt-2.5 block h-[3px] w-8 bg-brand-blue"></span>
               <span class="mt-2.5 font-sans text-[14px] leading-relaxed text-ink-soft">
                 {reason.description}
               </span>
@@ -131,7 +131,7 @@ const lastIndex = why.reasons.length - 1
     height: 58px;
     background: repeating-linear-gradient(
       180deg,
-      rgb(248 232 24 / 0.35) 0 4px,
+      rgb(253 224 1 / 0.35) 0 4px,
       transparent 4px 13px
     );
     mask-image: linear-gradient(to left, black 10%, transparent 100%);

@@ -54,7 +54,7 @@ const { tone, rhythm } = Astro.props
 
     {/* Proposta, usos e CTA */}
     <div>
-      <span class="inline-flex items-center gap-2.5 font-sans text-[12px] font-bold tracking-[0.16em] text-brand uppercase sm:text-[13px]">
+      <span class="inline-flex items-center gap-2.5 font-sans text-[12px] font-bold tracking-[0.16em] text-brand-blue uppercase sm:text-[13px]">
         <span aria-hidden="true" class="h-2 w-5 shrink-0 -skew-x-12 bg-brand-yellow"></span>
         {rental.eyebrow}
       </span>
@@ -68,7 +68,7 @@ const { tone, rhythm } = Astro.props
       <ul class="mt-8 grid gap-4 sm:grid-cols-2">
         {rental.items.map((item) => (
           <li class="rounded-xl border border-neutral-gray-200/40 bg-neutral-gray-100 p-5">
-            <span class="flex size-11 items-center justify-center rounded-lg bg-brand text-brand-yellow">
+            <span class="flex size-11 items-center justify-center rounded-lg bg-brand-blue text-brand-yellow">
               <Icon name={item.icon} class="size-[22px]" />
             </span>
             <span class="mt-4 block font-display text-[17px] leading-snug font-extrabold text-primary-dark-900">
@@ -96,7 +96,11 @@ const { tone, rhythm } = Astro.props
     bottom: 22%;
     width: 120px;
     height: 58px;
-    background: repeating-linear-gradient(180deg, var(--color-brand) 0 4px, transparent 4px 13px);
+    background: repeating-linear-gradient(
+      180deg,
+      var(--color-brand-blue) 0 4px,
+      transparent 4px 13px
+    );
     mask-image: linear-gradient(to left, black 20%, transparent 100%);
     -webkit-mask-image: linear-gradient(to left, black 20%, transparent 100%);
   }
