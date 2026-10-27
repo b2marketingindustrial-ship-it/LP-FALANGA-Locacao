@@ -16,9 +16,10 @@ export const site = {
   context: 'indústrias no Nordeste',
   /**
    * URL absoluta da página no ar (entrada 10). Usada em canonical e og:url.
-   * Provisória: endereço da LP antiga, até a Falanga confirmar onde a nova vai ao ar.
+   * Padrão das LPs Falanga: `falangapneumatica.com.br/<slug>/` (definido em 27/10/2026). A página
+   * antiga (`-2025`) precisa ser substituída ou redirecionada.
    */
-  url: 'https://falangapneumatica.com.br/locacao-de-compressores-2025/',
+  url: 'https://falangapneumatica.com.br/locacao-de-compressores/',
   /** Endereço completo com CEP (entrada 9). Footer e JSON-LD: as duas unidades, como nas outras LPs Falanga. */
   address: 'R. Mirian Rocha, 97 - Fortaleza - CE · Rua Tomaz Gonzaga, 74 - Zumbi, Recife - PE',
   /** Link da política de privacidade do cliente (entrada 10). Vazio esconde o link, mas a nota de LGPD continua. */
@@ -75,5 +76,5 @@ export const campaign = {
   forbidden: readonly string[]
 }
 
-/** WhatsApp comercial (entrada 12). Número no formato internacional, só dígitos (ex.: 5511999999999). Vazio desativa o botão flutuante. */
+/** WhatsApp comercial (entrada 12). Número no formato internacional, só dígitos (ex.: 5511999999999). Sem botão flutuante nas LPs Falanga: o campo só é conferido pelo `check:lp`. */
 export const whatsapp = ''

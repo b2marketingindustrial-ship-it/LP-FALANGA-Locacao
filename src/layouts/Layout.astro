@@ -5,14 +5,8 @@ import logoImg from '../assets/LOGO.png'
 import '../styles/global.css'
 // Mesmo arquivo do @font-face de global.css: o Vite dá a ele uma única URL com hash.
 import manropeUrl from '../styles/fonts/manrope-latin.woff2?url'
-import {
-  site,
-  title as defaultTitle,
-  description as defaultDescription,
-  whatsapp,
-} from '../data/site'
+import { site, title as defaultTitle, description as defaultDescription } from '../data/site'
 import { hero } from '../data/content'
-import WhatsAppFloat from '../components/WhatsAppFloat.astro'
 
 interface Props {
   title?: string
@@ -88,7 +82,7 @@ const jsonLd = {
       Pular para o conteúdo
     </a>
     <slot />
-    {whatsapp && <WhatsAppFloat number={whatsapp} />}
+    {/* Sem botão flutuante de WhatsApp (regra das LPs Falanga, 23/10/2026). */}
 
     <script is:inline>
       // Parâmetros de depuração, usados pelos scripts de captura. Não fazem nada numa
