@@ -187,11 +187,13 @@ for (const f of astroFiles) {
       'data-cta="header-cta"',
     ],
     'Hero.astro': [
-      'data-hero',
-      'data-cta="hero-whatsapp"',
-      'data-whatsapp-slot',
+      'grid-template-columns: minmax(0, var(--text-col)) minmax(0, 1fr) 340px',
+      'left: calc(var(--col-end) - var(--photo-pull) - var(--photo-bleed))',
+      'hero-chat',
+      '<slot name="shortcode">',
+      'lg:w-[340px]',
+      'data-hero-grid',
       'fetchpriority="high"',
-      'hero-band',
     ],
     'QuoteForm.astro': [
       'id="cotacao"',

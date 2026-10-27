@@ -8,13 +8,20 @@
  * Falanga Pneumática — locação de compressores Schulz. Copy da LP antiga
  * (falangapneumatica.com.br/locacao-de-compressores-2025/), ajustado ao layout.
  */
+import type { IconName } from './icons'
 import type { Photo } from './types'
 import { site } from './site'
 
-import heroCompressores from '@assets/hero-compressores.webp'
+import heroBg from '@assets/heroBg.webp'
 import schulz from '@assets/schulz.png'
 
 /* ------------------------------------------------------------------ tipos */
+
+export interface HeroPoint {
+  icon: IconName
+  line1: string
+  line2: string
+}
 
 /** Trecho de texto com destaque: `strong` em negrito, `accent` em negrito azul. */
 export type RichText = readonly (string | { strong: string } | { accent: string })[]
@@ -52,46 +59,30 @@ export const header = {
 
 /* -------------------------------------------------------------------- hero */
 
-/**
- * Hero claro do mockup aprovado pelo usuário em 22/10/2026: texto, botão de cotação e selo de
- * tradição à esquerda; compressores Schulz no chão do estúdio, diante do painel azul.
- */
 export const hero = {
-  eyebrow: 'Sua parceira no Nordeste em soluções de ar comprimido',
-  /** H1 completo: é nele que o `check:lp` procura a palavra-chave da campanha. */
+  /** H1 da página, na pílula de abertura. É o que o `check:lp` confere contra a palavra-chave da campanha. */
   title: 'Locação de Compressores',
-  /** Trecho final do título, em azul na segunda linha (precisa existir dentro de `title`). */
-  highlight: 'Compressores',
-  text: [
-    'Aluguel de compressores de ar com ',
-    { strong: 'qualidade, flexibilidade e economia:' },
-    ' o equipamento certo, quando e onde a sua indústria precisar.',
-  ],
-  /** Rótulo do botão do mockup (fora do vocabulário fixo de CTA, a pedido do usuário). */
-  button: 'Solicitar cotação',
-  /** Selo de tradição sob o botão. */
-  trust: {
-    title: 'Mais de 40 anos de tradição',
-    text: ['Tecnologia de compressores de ar ', { accent: 'SCHULZ' }, '.'],
-  },
-  /** Selo flutuante sobre o painel azul. */
-  chip: { title: 'Manutenção inclusa', text: 'sem custo além da locação' },
-  /** Faixa amarela que fecha o hero. */
-  band: ['Temos o ', { strong: 'COMPRESSOR IDEAL' }, ' para a sua aplicação!'],
+  /** Manchete em duas linhas: `headline` em branco e `highlight[0]` em amarelo na primeira; o resto de `highlight` na segunda. */
+  headline: ['Sua produção'],
+  highlight: ['não para.', 'Manutenção inclusa.'],
+  text: 'Aluguel de compressores de ar com qualidade, flexibilidade e economia: o equipamento certo, onde a sua indústria precisar.',
   banner: {
-    src: heroCompressores,
-    alt: 'Compressores de parafuso Schulz SRP 4030, SRP 4030 Total Solution e SRP 5100',
+    src: heroBg,
+    alt: 'Compressores de parafuso Schulz SRP 4030, SRP 4030 Total Solution e SRP 5100 da frota de locação',
   },
+  points: [
+    { icon: 'wrench', line1: 'Manutenção', line2: 'inclusa' },
+    { icon: 'cpu', line1: 'Compressores', line2: 'Schulz' },
+    { icon: 'map-pin', line1: 'Atendimento', line2: 'no Nordeste' },
+    { icon: 'users', line1: 'Equipe', line2: 'especializada' },
+  ],
 } as const satisfies {
-  eyebrow: string
   title: string
-  highlight: string
-  text: RichText
-  button: string
-  trust: { title: string; text: RichText }
-  chip: { title: string; text: string }
-  band: RichText
+  headline: readonly string[]
+  highlight: readonly string[]
+  text: string
   banner: Photo
+  points: readonly [HeroPoint, HeroPoint, HeroPoint, HeroPoint]
 }
 
 /* ----------------------------------------------------------------- cotação */

@@ -27,7 +27,7 @@ const avifSrcset = async (src: ImageMetadata, widths: number[]) =>
   (await Promise.all(widths.map((width) => getImage({ src, width, format: 'avif' }))))
     .map((img, i) => `${img.src} ${widths[i]}w`)
     .join(', ')
-const heroBannerSrcset = await avifSrcset(hero.banner.src, [640, 960, 1280, 1600])
+const heroBannerSrcset = await avifSrcset(hero.banner.src, [640, 1024, 1536, 1870])
 const ogLogo = await getImage({ src: logoImg, width: 512, format: 'webp' })
 
 const ogImage = new URL(ogLogo.src, site.url).href
@@ -73,7 +73,7 @@ const jsonLd = {
       as="image"
       type="image/avif"
       imagesrcset={heroBannerSrcset}
-      imagesizes="(min-width: 1320px) 780px, (min-width: 1024px) 58vw, 100vw"
+      imagesizes="(min-width: 1024px) 1660px, 700px"
       fetchpriority="high"
     />
     <link rel="preload" href={manropeUrl} as="font" type="font/woff2" crossorigin />
