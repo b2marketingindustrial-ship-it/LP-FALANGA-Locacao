@@ -79,12 +79,12 @@ Aplicada à mão em `22/10/2026` (a biblioteca de seções não está nesta past
 
 ## Assets
 
-| Asset          | Arquivo                                | Status   | Observação                                                                                             |
-| -------------- | -------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------ |
-| Logo           | `src/assets/LOGO.png`                  | extraído | logo com selo de 40 anos da LP antiga, **só 341×82** — pedir versão maior/vetor                        |
-| Banner do hero | `src/assets/heroBg.webp`               | gerado   | recorte dos compressores da LP antiga (SRP 4030, SRP 4030 TS, SRP 5100) sobre o navy do hero, 1981×900 |
-| Foto da frota  | `src/assets/locacao/frota-schulz.webp` | extraído | página /locacao/ do site, 680×682 — pedir original em alta                                             |
-| Favicon        | `public/favicon.svg`                   | inferido | desenhado a partir da logo (placa amarela, riscos e "F" azuis)                                         |
+| Asset          | Arquivo                                | Status   | Observação                                                                                                          |
+| -------------- | -------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------- |
+| Logo           | `src/assets/LOGO.png`                  | cliente  | logo nova (10/11/2026), montada na horizontal (símbolo + nome) a partir da versão empilhada, 1670×261 — pedir vetor |
+| Banner do hero | `src/assets/heroBg.webp`               | gerado   | recorte dos compressores da LP antiga (SRP 4030, SRP 4030 TS, SRP 5100) sobre o navy do hero, 1981×900              |
+| Foto da frota  | `src/assets/locacao/frota-schulz.webp` | extraído | página /locacao/ do site, 680×682 — pedir original em alta                                                          |
+| Favicon        | `public/favicon.svg`                   | inferido | desenhado a partir da logo (placa amarela, riscos e "F" azuis)                                                      |
 
 ## Desvios do padrão
 

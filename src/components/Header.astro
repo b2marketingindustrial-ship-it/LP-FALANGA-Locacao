@@ -27,20 +27,20 @@ import { header, cta } from '../data/content'
     class="block h-[3px] bg-[linear-gradient(90deg,var(--color-brand-yellow)_0%,var(--color-brand-yellow)_40%,var(--color-brand-blue)_100%)]"
   ></span>
   <div class="page-container flex items-center justify-between gap-3 py-3 sm:gap-6">
-    {/* 1. Logo da Falanga, 20% menor que a do padrão, e, separada por um filete, a da Schulz. A da
-        Schulz some abaixo de 640px, onde não cabe ao lado do CTA. */}
+    {/* 1. Logo da Falanga (nova, versão horizontal: símbolo + nome) e, separada por um filete, a da
+        Schulz. A da Schulz some abaixo de 640px, onde não cabe ao lado do CTA. */}
     <div class="flex shrink-0 items-center gap-5 lg:gap-6">
       <a href="/" class="flex shrink-0 items-center">
         <Image
           src={logo}
           alt={site.brand}
-          width={341}
-          height={82}
+          width={576}
+          height={90}
           format="webp"
           loading="eager"
           fetchpriority="low"
           decoding="async"
-          class="header-logo h-8 w-auto sm:h-[45px]"
+          class="header-logo h-7 w-auto sm:h-[38px]"
         />
       </a>
       <span aria-hidden="true" class="hidden h-8 w-px bg-primary-dark/15 sm:block"></span>

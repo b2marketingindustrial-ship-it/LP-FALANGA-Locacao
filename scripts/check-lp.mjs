@@ -477,7 +477,7 @@ async function checkAssetSpecs(manifest) {
 /** Especificação das imagens da estrutura fixa, que não pertencem a nenhuma seção. */
 const FIXED_ASSET_SPECS = [
   // Falanga: logo horizontal no header claro e compressores recortados no hero (ver "Desvios do padrão").
-  { dir: '.', match: 'LOGO', width: 341, height: 82, alpha: true },
+  { dir: '.', match: 'LOGO', width: 576, height: 90, alpha: true },
   { dir: '.', match: 'hero-compressores', width: 2400, height: 899, alpha: true },
   { dir: 'brands', width: 400, height: 160, alpha: null },
 ]
